@@ -740,6 +740,92 @@ strong { color: var(--text-hi); font-weight: 500; }
 }
 .cert-card p { font-size: var(--fs-sm); color: var(--text-low); }
 
+/* Clickable cards (have a cert image) get a pointer + magnifier hint */
+.cert-card[data-cert] { cursor: pointer; }
+.cert-card[data-cert]::after {
+  content: "";
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  width: 18px;
+  height: 18px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  background: no-repeat center / contain
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300e5ff' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M21 21l-4.3-4.3M11 8v6M8 11h6'/%3E%3C/svg%3E");
+}
+.cert-card[data-cert]:hover::after,
+.cert-card[data-cert]:focus-visible::after { opacity: 1; transform: scale(1); }
+.cert-card[data-cert]:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Cert lightbox ---------- */
+.cert-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  background: rgba(6, 6, 10, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: lb-fade var(--dur) var(--ease);
+}
+.cert-lightbox[hidden] { display: none; }
+@keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.cert-lightbox-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  max-width: 92vw;
+  max-height: 90vh;
+}
+.cert-lightbox-img {
+  max-width: 92vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 6px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 229, 255, 0.1);
+  animation: lb-pop var(--dur-slow) var(--ease);
+}
+@keyframes lb-pop { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.cert-lightbox-caption {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  color: var(--text-mid);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+.cert-lightbox-close {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-hi);
+  background: rgba(26, 26, 36, 0.7);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.cert-lightbox-close:hover {
+  color: var(--accent);
+  border-color: rgba(0, 229, 255, 0.4);
+  background: rgba(0, 229, 255, 0.08);
+}
+
 /* ---------- Contact ---------- */
 .section-contact { padding-bottom: var(--sp-12); }
 .contact-box {

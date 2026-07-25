@@ -126,6 +126,58 @@
     setTimeout(() => copyBtn.classList.remove("copied"), 2000);
   });
 
+  /* ---------- Certificate lightbox ---------- */
+  // Placed before the particle block on purpose: that block returns early on
+  // mobile / reduced-motion, so anything after it would never run there.
+  const lightbox = document.getElementById("cert-lightbox");
+  if (lightbox) {
+    const lbImg = document.getElementById("cert-lightbox-img");
+    const lbCaption = document.getElementById("cert-lightbox-caption");
+    const lbClose = document.getElementById("cert-lightbox-close");
+    let lastFocused = null;
+
+    const openLightbox = (card) => {
+      const src = card.dataset.cert;
+      if (!src) return;
+      const title = card.querySelector("h4")?.textContent.trim() || "";
+      const sub = card.querySelector("p")?.textContent.trim() || "";
+      lbImg.src = src;
+      lbImg.alt = "ใบประกาศนียบัตร: " + title;
+      lbCaption.textContent = sub ? `${title} — ${sub}` : title;
+      lastFocused = card;
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+      lbClose.focus();
+    };
+
+    const closeLightbox = () => {
+      lightbox.hidden = true;
+      lbImg.src = "";
+      document.body.style.overflow = "";
+      if (lastFocused) lastFocused.focus();
+    };
+
+    // Open: click or keyboard (Enter/Space) on any card that has an image
+    document.querySelectorAll(".cert-card[data-cert]").forEach((card) => {
+      card.addEventListener("click", () => openLightbox(card));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openLightbox(card);
+        }
+      });
+    });
+
+    // Close: button, backdrop click, or Escape
+    lbClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !lightbox.hidden) closeLightbox();
+    });
+  }
+
   /* ---------- Particle network background ---------- */
   // Skipped entirely on reduced motion or small screens (performance)
   const canvas = document.getElementById("bg-canvas");
