@@ -1,0 +1,329 @@
+/* ============================================================
+   PHUPHA KONGTHIN — Resume
+   Screen: dark, matches the portfolio.
+   Print:  light A4, ink-frugal, one page.
+   Shared by resume.html (TH) and resume-en.html (EN).
+   ============================================================ */
+
+:root {
+  --bg-0: #0a0a0f;
+  --bg-1: #12121a;
+  --line: rgba(148, 163, 184, 0.16);
+  --text-hi: #e4e7ee;
+  --text-mid: #a3aab8;
+  --text-low: #6b7280;
+  --accent: #00e5ff;
+
+  --font-display: "Kanit", sans-serif;
+  --font-body: "IBM Plex Sans Thai", sans-serif;
+
+  --sheet-pad: 20mm 18mm;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-0);
+  color: var(--text-mid);
+  font-family: var(--font-body);
+  font-size: 10.5pt;
+  line-height: 1.6;
+  font-weight: 300;
+  padding: 32px 16px 64px;
+}
+
+h1, h2, h3 { font-family: var(--font-display); color: var(--text-hi); line-height: 1.25; font-weight: 500; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+strong { color: var(--text-hi); font-weight: 500; }
+
+/* ---------- Toolbar (screen only) ---------- */
+.toolbar {
+  width: min(210mm, 100%);
+  margin: 0 auto 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+.tool-btn {
+  font-family: var(--font-body);
+  font-size: 9.5pt;
+  color: var(--text-mid);
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: color 200ms, border-color 200ms, background 200ms;
+}
+.tool-btn:hover { color: var(--text-hi); border-color: rgba(0, 229, 255, 0.4); }
+.tool-btn.primary {
+  color: var(--accent);
+  border-color: rgba(0, 229, 255, 0.4);
+}
+.tool-btn.primary:hover { background: rgba(0, 229, 255, 0.1); }
+.toolbar-spacer { margin-right: auto; }
+
+/* ---------- The sheet ---------- */
+.sheet {
+  width: min(210mm, 100%);
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: var(--sheet-pad);
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+/* ---------- Header ---------- */
+.r-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--accent);
+}
+.r-head-id { display: flex; align-items: center; gap: 16px; }
+.r-photo {
+  width: 74px;
+  height: 92px;
+  object-fit: cover;
+  object-position: center 18%;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  flex: none;
+}
+.r-name { font-size: 24pt; font-weight: 600; letter-spacing: -0.5px; }
+.r-title {
+  font-family: var(--font-display);
+  font-size: 10.5pt;
+  color: var(--accent);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+.r-contact { font-size: 9.5pt; text-align: right; line-height: 1.9; }
+.r-contact li { white-space: nowrap; }
+.r-contact .label { color: var(--text-low); margin-right: 6px; }
+
+/* ---------- Summary ---------- */
+.r-summary {
+  margin-top: 14px;
+  font-size: 10pt;
+  line-height: 1.7;
+}
+.r-summary em { color: var(--accent); font-style: normal; font-weight: 400; }
+
+/* ---------- Body grid ---------- */
+.r-body {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 0 28px;
+  margin-top: 20px;
+}
+.r-main > section + section,
+.r-side > section + section { margin-top: 18px; }
+
+/* ---------- Section headings ---------- */
+.r-h2 {
+  font-size: 10pt;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--text-hi);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.r-h2::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  flex: none;
+}
+
+/* ---------- Entries (experience / education) ---------- */
+.entry + .entry { margin-top: 12px; }
+.entry-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.entry-org { font-size: 11pt; font-weight: 500; }
+.entry-when {
+  font-size: 8.5pt;
+  color: var(--accent);
+  white-space: nowrap;
+  font-family: var(--font-display);
+}
+.entry-role { font-size: 9.5pt; color: var(--text-low); }
+.entry-desc { font-size: 9.5pt; margin-top: 3px; }
+.entry-desc li { padding-left: 13px; position: relative; }
+.entry-desc li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.72em;
+  width: 4px;
+  height: 1px;
+  background: var(--text-low);
+}
+
+/* ---------- Skills ---------- */
+.skill-row + .skill-row { margin-top: 9px; }
+.skill-name {
+  font-family: var(--font-display);
+  font-size: 9pt;
+  color: var(--text-hi);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.skill-list { font-size: 9.5pt; color: var(--text-mid); }
+.skill-list .sep { color: var(--text-low); margin: 0 5px; }
+
+/* ---------- Certifications ---------- */
+.cert-block + .cert-block { margin-top: 14px; }
+.cert-issuer {
+  font-family: var(--font-display);
+  font-size: 8.5pt;
+  color: var(--text-low);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.cert-item { font-size: 9.5pt; padding-left: 13px; position: relative; }
+.cert-item + .cert-item { margin-top: 6px; }
+.cert-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 4px;
+  height: 4px;
+  border: 1px solid var(--accent);
+  transform: rotate(45deg);
+}
+.cert-item .lvl {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 7.5pt;
+  color: var(--accent);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 3px;
+  padding: 0 5px;
+  margin-left: 5px;
+  vertical-align: 1.5px;
+  letter-spacing: 0.4px;
+}
+.cert-item .sub { display: block; font-size: 8.5pt; color: var(--text-low); }
+
+/* ---------- Footer note ---------- */
+.r-foot {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 8.5pt;
+  color: var(--text-low);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   Narrow screens: stack the two columns
+   ============================================================ */
+@media (max-width: 700px) {
+  body { padding: 20px 12px 48px; font-size: 11pt; }
+  :root { --sheet-pad: 24px 20px; }
+  .sheet { min-height: 0; }
+  .r-body { grid-template-columns: 1fr; gap: 0; }
+  .r-side { margin-top: 18px; }
+  .r-contact { text-align: left; }
+  .toolbar { justify-content: stretch; }
+  .toolbar-spacer { display: none; }
+  .tool-btn { flex: 1; }
+}
+
+/* ============================================================
+   PRINT — A4, light, one page
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 13mm 14mm;
+}
+
+@media print {
+  /* Force the light palette; keep the accent as a print-safe teal */
+  :root {
+    --bg-0: #ffffff;
+    --bg-1: #ffffff;
+    --line: #d4d8e0;
+    --text-hi: #111318;
+    --text-mid: #33383f;
+    --text-low: #6b7280;
+    --accent: #0088a8;
+  }
+
+  html, body { background: #fff; }
+  body {
+    padding: 0;
+    font-size: 10.5pt;
+    line-height: 1.62;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .toolbar, .no-print { display: none !important; }
+
+  .sheet {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: #fff;
+  }
+
+  /* Vertical rhythm tuned so the content fills one A4 page without spilling */
+  .r-head { padding-bottom: 16px; }
+  .r-photo { width: 82px; height: 102px; }
+  .r-name { font-size: 26pt; }
+  .r-title { font-size: 11pt; }
+  .r-contact { font-size: 9.5pt; line-height: 2.05; }
+  .r-summary { font-size: 10.5pt; margin-top: 18px; line-height: 1.75; }
+  .r-body { margin-top: 26px; gap: 0 26px; }
+  .r-main > section + section,
+  .r-side > section + section { margin-top: 24px; }
+  .r-h2 { font-size: 10.5pt; padding-bottom: 7px; margin-bottom: 13px; }
+  .entry + .entry { margin-top: 16px; }
+  .entry-org { font-size: 12pt; }
+  .entry-role { font-size: 10pt; }
+  .entry-desc, .skill-list, .cert-item { font-size: 10pt; }
+  .entry-desc { margin-top: 5px; }
+  .entry-when { font-size: 9.5pt; }
+  .skill-name { font-size: 9.5pt; }
+  .cert-issuer { font-size: 9pt; margin-bottom: 9px; }
+  .cert-item .sub { font-size: 9pt; }
+  .cert-item + .cert-item { margin-top: 9px; }
+  .cert-block + .cert-block { margin-top: 18px; }
+  .skill-row + .skill-row { margin-top: 12px; }
+  .r-foot { margin-top: 24px; padding-top: 12px; font-size: 9pt; }
+
+  /* Never split an entry or a heading across pages */
+  .entry, .cert-item, .skill-row { break-inside: avoid; }
+  .r-h2 { break-after: avoid; }
+  section { break-inside: avoid-page; }
+
+  a { color: inherit; }
+}
