@@ -103,5 +103,5 @@ git push -u origin main
 ## เช็คก่อนอัพ
 
 - [ ] ใส่รูปโปรไฟล์จริงแทน placeholder (แก้ `<div class="portrait-ph">` ใน index.html เป็น `<img src="profile.jpg" alt="ภูผา คงถิ่น">` แล้วอัพไฟล์รูปขึ้นไปด้วย)
-- [ ] เช็คอีเมลติดต่อถูกต้อง: `ko.phupha_st@tni.ac.th`
+- [ ] เช็คอีเมลติดต่อถูกต้อง: `phuphakongtin@gmail.com`
 - [ ] เปิดเว็บบนมือถือดูอีกรอบหลัง deploy
