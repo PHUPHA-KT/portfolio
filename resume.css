@@ -295,30 +295,34 @@ strong { color: var(--text-hi); font-weight: 500; }
     background: #fff;
   }
 
-  /* Vertical rhythm tuned so the content fills one A4 page without spilling */
-  .r-head { padding-bottom: 16px; }
-  .r-photo { width: 82px; height: 102px; }
-  .r-name { font-size: 26pt; }
-  .r-title { font-size: 11pt; }
-  .r-contact { font-size: 9.5pt; line-height: 2.05; }
-  .r-summary { font-size: 10.5pt; margin-top: 18px; line-height: 1.75; }
-  .r-body { margin-top: 26px; gap: 0 26px; }
+  /* Vertical rhythm tuned so the content fills one A4 page without spilling.
+     Measured at the true A4 printable width (182mm), where text wraps more
+     than on a wide screen — keep a few mm of headroom. */
+  .r-head { padding-bottom: 11px; }
+  .r-photo { width: 76px; height: 95px; }
+  .r-name { font-size: 23pt; }
+  .r-title { font-size: 10pt; }
+  .r-contact { font-size: 9pt; line-height: 1.75; }
+  .r-summary { font-size: 9.5pt; margin-top: 11px; line-height: 1.55; }
+  .r-body { margin-top: 15px; gap: 0 22px; }
   .r-main > section + section,
-  .r-side > section + section { margin-top: 24px; }
-  .r-h2 { font-size: 10.5pt; padding-bottom: 7px; margin-bottom: 13px; }
-  .entry + .entry { margin-top: 16px; }
-  .entry-org { font-size: 12pt; }
-  .entry-role { font-size: 10pt; }
-  .entry-desc, .skill-list, .cert-item { font-size: 10pt; }
-  .entry-desc { margin-top: 5px; }
-  .entry-when { font-size: 9.5pt; }
-  .skill-name { font-size: 9.5pt; }
-  .cert-issuer { font-size: 9pt; margin-bottom: 9px; }
-  .cert-item .sub { font-size: 9pt; }
-  .cert-item + .cert-item { margin-top: 9px; }
-  .cert-block + .cert-block { margin-top: 18px; }
-  .skill-row + .skill-row { margin-top: 12px; }
-  .r-foot { margin-top: 24px; padding-top: 12px; font-size: 9pt; }
+  .r-side > section + section { margin-top: 14px; }
+  .r-h2 { font-size: 9.5pt; padding-bottom: 5px; margin-bottom: 9px; }
+  .entry + .entry { margin-top: 10px; }
+  .entry-org { font-size: 11pt; }
+  .entry-role { font-size: 9pt; }
+  .entry-desc, .skill-list, .cert-item { font-size: 9.3pt; }
+  .entry-desc { margin-top: 3px; line-height: 1.42; }
+  .entry-when { font-size: 8.5pt; }
+  .skill-name { font-size: 9pt; }
+  .skill-list { line-height: 1.42; }
+  .cert-issuer { font-size: 8.5pt; margin-bottom: 6px; }
+  .cert-item { line-height: 1.35; }
+  .cert-item .sub { font-size: 8.5pt; }
+  .cert-item + .cert-item { margin-top: 5px; }
+  .cert-block + .cert-block { margin-top: 11px; }
+  .skill-row + .skill-row { margin-top: 7px; }
+  .r-foot { margin-top: 14px; padding-top: 9px; font-size: 8.5pt; }
 
   /* Never split an entry or a heading across pages */
   .entry, .cert-item, .skill-row { break-inside: avoid; }
