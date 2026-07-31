@@ -630,6 +630,17 @@ strong { color: var(--text-hi); font-weight: 500; }
 }
 .skill-tags li:hover { border-color: rgba(0, 229, 255, 0.45); color: var(--text-hi); }
 
+/* Label above the AI tools tag strip in the featured skill card */
+.skill-tools-label {
+  margin-top: var(--sp-3);
+  margin-bottom: var(--sp-2);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+}
+
 /* ---------- Timeline ---------- */
 .timeline {
   position: relative;
