@@ -178,6 +178,17 @@ strong { color: var(--text-hi); font-weight: 500; }
   background: var(--text-low);
 }
 
+/* ---------- Project demo link ---------- */
+.r-proj-link {
+  display: inline-block;
+  margin-top: 3px;
+  font-size: 9pt;
+  color: var(--accent);
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+.r-proj-link::before { content: "▶ "; font-size: 0.85em; }
+
 /* ---------- Skills ---------- */
 .skill-row + .skill-row { margin-top: 9px; }
 .skill-name {
@@ -301,8 +312,8 @@ strong { color: var(--text-hi); font-weight: 500; }
   html, body { background: #fff; }
   body {
     padding: 0;
-    font-size: 10.5pt;
-    line-height: 1.62;
+    font-size: 10.3pt;
+    line-height: 1.53;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -327,28 +338,40 @@ strong { color: var(--text-hi); font-weight: 500; }
   .r-name { font-size: 23pt; }
   .r-title { font-size: 10pt; }
   .r-contact { font-size: 9pt; line-height: 1.75; }
-  .r-summary { font-size: 9.5pt; margin-top: 11px; line-height: 1.55; }
-  .r-body { margin-top: 15px; gap: 0 22px; }
+  .r-summary { font-size: 9.3pt; margin-top: 8px; line-height: 1.45; }
+  .r-body { margin-top: 12px; gap: 0 22px; }
   .r-main > section + section,
-  .r-side > section + section { margin-top: 14px; }
-  .r-h2 { font-size: 9.5pt; padding-bottom: 5px; margin-bottom: 9px; }
-  .entry + .entry { margin-top: 10px; }
+  .r-side > section + section { margin-top: 10px; }
+  .r-h2 { font-size: 9.5pt; padding-bottom: 5px; margin-bottom: 8px; }
+  .entry + .entry { margin-top: 8px; }
   .entry-org { font-size: 11pt; }
   .entry-role { font-size: 9pt; }
   .entry-desc, .skill-list, .cert-item { font-size: 9.3pt; }
-  .entry-desc { margin-top: 3px; line-height: 1.42; }
+  .entry-desc { margin-top: 3px; line-height: 1.35; }
   .entry-when { font-size: 8.5pt; }
   .skill-name { font-size: 9pt; }
-  .skill-list { line-height: 1.42; }
-  .cert-issuer { font-size: 8.5pt; margin-bottom: 6px; }
-  .cert-item { line-height: 1.35; }
+  .skill-list { line-height: 1.35; }
+  .cert-issuer { font-size: 8.5pt; margin-bottom: 5px; }
+  .cert-item { line-height: 1.3; }
   .cert-item .sub { font-size: 8.5pt; }
-  .cert-item + .cert-item { margin-top: 5px; }
-  .cert-block + .cert-block { margin-top: 11px; }
+  .cert-item + .cert-item { margin-top: 4px; }
+  .cert-block + .cert-block { margin-top: 8px; }
   .skill-row + .skill-row { margin-top: 7px; }
+  .r-proj + .r-proj { margin-top: 8px; }
   .r-foot { margin-top: 14px; padding-top: 9px; font-size: 8.5pt; }
   .r-qr img { width: 22mm; height: 22mm; padding: 0; }
   .r-qr figcaption { font-size: 7pt; }
+
+  /* Thai text is more compact than English here, so loosen the Thai-only
+     resume a little to fill the page (English stays tight to fit one page). */
+  html[lang="th"] body { line-height: 1.6; }
+  html[lang="th"] .r-summary { line-height: 1.55; margin-top: 10px; }
+  html[lang="th"] .r-body { margin-top: 16px; }
+  html[lang="th"] .r-main > section + section,
+  html[lang="th"] .r-side > section + section { margin-top: 15px; }
+  html[lang="th"] .entry + .entry { margin-top: 11px; }
+  html[lang="th"] .cert-item + .cert-item { margin-top: 6px; }
+  html[lang="th"] .cert-block + .cert-block { margin-top: 12px; }
 
   /* Never split an entry or a heading across pages */
   .entry, .cert-item, .skill-row { break-inside: avoid; }
