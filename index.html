@@ -290,6 +290,37 @@
             <a class="btn btn-primary" href="https://www.youtube.com/watch?v=HCU_ZVkONLQ" target="_blank" rel="noopener">ดูวิดีโอ Demo</a>
           </div>
         </article>
+
+        <article class="project-card glass reveal">
+          <a class="project-shot" href="projects/radar-dashboard.jpg" target="_blank" rel="noopener">
+            <img src="projects/radar-dashboard.jpg" alt="แดชบอร์ด Manhwa Radar แสดงตัวกรอง สถิติ และรายการมังฮวาพร้อมเรื่องย่อภาษาไทย" width="1035" height="819" loading="lazy" />
+          </a>
+          <div class="project-info">
+            <span class="project-tag">Automation · Data Pipeline</span>
+            <h3>Manhwa Radar — ระบบเฝ้าติดตามมังฮวาใหม่อัตโนมัติ</h3>
+            <p class="project-sub">Automated New-Release Tracking Pipeline</p>
+            <p class="project-desc">
+              ดึงข้อมูลจาก 6 แหล่ง (MangaUpdates, Naver Series, Lezhin, Kakao Page, Ridi และ X)
+              ตามตารางเวลาอัตโนมัติ กรองรายการซ้ำด้วย fuzzy matching เก็บลง SQLite
+              แล้วสรุปเป็นรายงานรายวันทั้ง HTML และ Markdown พร้อม dashboard เว็บสำหรับค้นย้อนหลัง
+              และแปลเรื่องย่อเป็นภาษาไทยอัตโนมัติด้วย Claude API
+            </p>
+            <p class="project-metrics">
+              <span><strong>22</strong> โมดูล</span>
+              <span><strong>6,488</strong> บรรทัด</span>
+              <span><strong>18</strong> ไฟล์เทส</span>
+            </p>
+            <ul class="skill-tags">
+              <li>Python</li>
+              <li>Playwright</li>
+              <li>Flask</li>
+              <li>SQLite</li>
+              <li>pytest</li>
+              <li>Claude API</li>
+              <li>Task Scheduler</li>
+            </ul>
+          </div>
+        </article>
       </div>
     </section>
 
