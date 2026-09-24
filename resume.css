@@ -67,6 +67,9 @@ strong { color: var(--text-hi); font-weight: 500; }
 .toolbar-spacer { margin-right: auto; }
 
 /* ---------- The sheet ---------- */
+/* Keep Thai phrases intact — the browser's Thai line breaking can split words. */
+.nw { white-space: nowrap; }
+
 .sheet {
   width: min(210mm, 100%);
   min-height: 297mm;
@@ -280,7 +283,10 @@ strong { color: var(--text-hi); font-weight: 500; }
 @media (max-width: 700px) {
   body { padding: 20px 12px 48px; font-size: 11pt; }
   :root { --sheet-pad: 24px 20px; }
-  .sheet { min-height: 0; }
+  /* Keep Thai phrases intact — the browser's Thai line breaking can split words. */
+.nw { white-space: nowrap; }
+
+.sheet { min-height: 0; }
   .r-body { grid-template-columns: 1fr; gap: 0; }
   .r-side { margin-top: 18px; }
   .r-contact { text-align: left; }
@@ -320,7 +326,10 @@ strong { color: var(--text-hi); font-weight: 500; }
 
   .toolbar, .no-print { display: none !important; }
 
-  .sheet {
+  /* Keep Thai phrases intact — the browser's Thai line breaking can split words. */
+.nw { white-space: nowrap; }
+
+.sheet {
     width: auto;
     min-height: 0;
     margin: 0;

@@ -56,6 +56,9 @@ button { font: inherit; color: inherit; }
   border-radius: 4px;
 }
 
+/* Keep Thai phrases intact — the browser's Thai line breaking can split words. */
+.nw { white-space: nowrap; }
+
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
@@ -739,7 +742,8 @@ main { position: relative; z-index: 3; }
 }
 .project-title {
   margin: 0;
-  font: 500 clamp(1.5rem, 2.6vw, 2.1rem)/1.35 var(--display);
+  font: 500 clamp(1.3rem, 2.6vw + 0.4rem, 2.1rem)/1.35 var(--display);
+  text-wrap: balance;
 }
 .project-sub { margin: 6px 0 0; font-size: 14px; color: var(--faint); }
 
@@ -815,7 +819,7 @@ main { position: relative; z-index: 3; }
   letter-spacing: 0.14em;
   color: var(--accent);
 }
-.xp h3 { margin: 6px 0 0; font: 500 24px/1.4 var(--display); }
+.xp h3 { margin: 6px 0 0; font: 500 clamp(18px, 5.4vw, 24px)/1.4 var(--display); }
 
 /* Certifications */
 .section-certs .section-inner { width: min(100%, 520px); }
