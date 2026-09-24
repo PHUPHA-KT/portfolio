@@ -2,9 +2,9 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>document.documentElement.classList.add('js', 'is-loading');</script>
 
-  <!-- SEO / Social meta -->
   <title>ภูผา คงถิ่น — AI &amp; Automation Portfolio</title>
   <meta name="description" content="Portfolio ของ ภูผา คงถิ่น นักศึกษาเทคโนโลยีสารสนเทศสาย AI & Automation — สร้าง AI app / agent และระบบอัตโนมัติที่ลดงานซ้ำซ้อนได้จริง (เช่น pipeline อัตโนมัติจัดการงานแปลมังงะ) บนรากฐานความมั่นคงปลอดภัยไซเบอร์ระดับผู้เชี่ยวชาญจาก สกมช." />
   <meta property="og:type" content="website" />
@@ -13,7 +13,6 @@
   <meta property="og:image" content="https://phupha-kt.github.io/portfolio/profile.jpg" />
   <meta name="theme-color" content="#0a0a0f" />
 
-  <!-- Structured data for search engines -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -22,42 +21,56 @@
     "alternateName": "Phupha Kongtin",
     "email": "mailto:phuphakongtin@gmail.com",
     "jobTitle": "IT Student — AI & Automation",
-    "affiliation": {
-      "@type": "CollegeOrUniversity",
-      "name": "Thai-Nichi Institute of Technology"
-    },
+    "affiliation": { "@type": "CollegeOrUniversity", "name": "Thai-Nichi Institute of Technology" },
     "knowsAbout": ["AI App & Agent Development", "Workflow Automation", "Prompt Engineering", "Power Automate", "Penetration Testing", "OT Security", "Cybersecurity Analysis"]
   }
   </script>
 
-  <!-- Favicon: cyan hexagon (inline SVG) -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpolygon points='16,2 29,9.5 29,24.5 16,30 3,24.5 3,9.5' fill='none' stroke='%2300e5ff' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%2300e5ff'/%3E%3C/svg%3E" />
 
-  <!-- Fonts: Kanit (display) + IBM Plex Sans Thai (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
 
-  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
 
-  <!-- Ambient background: particle canvas + grid overlay -->
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
-  <div class="bg-grid" aria-hidden="true"></div>
+  <!-- ===================== LOADER ===================== -->
+  <div class="loader" id="loader" role="status" aria-live="polite">
+    <svg class="loader-mark" viewBox="0 0 32 32" aria-hidden="true">
+      <polygon points="16,2 29,9.5 29,24.5 16,30 3,24.5 3,9.5" pathLength="100" />
+    </svg>
+    <div class="loader-meta">
+      <span class="loader-count" id="loader-count">00</span>
+      <span class="loader-label">กำลังโหลด</span>
+    </div>
+  </div>
 
-  <!-- ===================== NAVBAR ===================== -->
-  <header class="navbar" id="navbar">
-    <nav class="navbar-inner container" aria-label="เมนูหลัก">
-      <a href="#hero" class="brand">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span class="brand-text">PHUPHA<span class="brand-dot">.</span></span>
-      </a>
+  <!-- ===================== SCENE LAYERS ===================== -->
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="scene-vignette" aria-hidden="true"></div>
+  <div class="labels" id="labels" aria-hidden="true"></div>
 
-      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="เปิด/ปิดเมนู">
-        <span></span><span></span><span></span>
-      </button>
-
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <a href="#hero" class="brand" aria-label="กลับด้านบน">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><polygon points="16,2 29,9.5 29,24.5 16,30 3,24.5 3,9.5" /><circle cx="16" cy="16" r="3.4" /></svg>
+      <span>PHUPHA<span class="brand-dot">.</span></span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="เปิด/ปิดเมนู">
+      <span></span><span></span>
+    </button>
+    <nav aria-label="เมนูหลัก">
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">เกี่ยวกับ</a></li>
         <li><a href="#skills">ทักษะ</a></li>
@@ -70,432 +83,287 @@
     </nav>
   </header>
 
+  <!-- Section indicator -->
+  <div class="rail" id="rail" aria-hidden="true">
+    <span class="rail-num" id="rail-num">00</span>
+    <span class="rail-track"><i id="rail-fill"></i></span>
+    <span class="rail-name" id="rail-name">Intro</span>
+  </div>
+
   <main>
 
     <!-- ===================== HERO ===================== -->
-    <section class="hero" id="hero">
-      <div class="container hero-grid">
-        <div class="hero-text">
-          <p class="hero-eyebrow anim-hero" style="--i:0">
-            <span class="eyebrow-line" aria-hidden="true"></span>
-            AI &amp; AUTOMATION
-          </p>
-          <h1 class="hero-name anim-hero" style="--i:1">ภูผา คงถิ่น</h1>
-          <p class="hero-role anim-hero" style="--i:2">นักศึกษาเทคโนโลยีสารสนเทศ · สถาบันเทคโนโลยีไทย-ญี่ปุ่น</p>
-          <p class="hero-pitch anim-hero" style="--i:3">
-            สร้าง <strong>AI app / agent</strong> และ<strong>ระบบอัตโนมัติที่ลดงานซ้ำซ้อนได้จริง</strong>
-            บนรากฐาน<strong>ความมั่นคงปลอดภัยไซเบอร์</strong>ระดับผู้เชี่ยวชาญจาก สกมช.
-          </p>
-          <div class="hero-actions anim-hero" style="--i:4">
-            <a href="#contact" class="btn btn-primary">ติดต่อ</a>
-            <a href="#certs" class="btn btn-ghost">ดูประกาศนียบัตร</a>
-          </div>
-
-          <!-- Counters animate on scroll (see script.js) -->
-          <div class="hero-stats anim-hero" style="--i:5">
-            <div class="stat">
-              <span class="stat-num" data-count="14">0</span><span class="stat-plus">+</span>
-              <span class="stat-label">ประกาศนียบัตร</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num" data-count="5">0</span>
-              <span class="stat-label">หลักสูตร สกมช.</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num" data-count="3">0</span>
-              <span class="stat-label">เดือนฝึกงาน MEA</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-visual anim-hero" style="--i:2">
-          <div class="portrait-frame">
-            <div class="portrait-ring" aria-hidden="true"></div>
-            <img class="portrait-img" src="profile.jpg" alt="ภูผา คงถิ่น" width="800" height="1059" loading="eager" />
-            <div class="portrait-corner tl" aria-hidden="true"></div>
-            <div class="portrait-corner br" aria-hidden="true"></div>
-          </div>
+    <section class="hero" id="hero" data-formation="0" data-side="center" data-name="Intro" data-index="00">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="eyebrow intro" style="--i:0">AI &amp; AUTOMATION</p>
+        <h1 class="hero-title intro" style="--i:1">ภูผา คงถิ่น</h1>
+        <p class="hero-role intro" style="--i:2">นักศึกษาเทคโนโลยีสารสนเทศ · สถาบันเทคโนโลยีไทย-ญี่ปุ่น</p>
+        <p class="hero-pitch intro" style="--i:3">
+          สร้าง <strong>AI app / agent</strong> และ<strong>ระบบอัตโนมัติที่ลดงานซ้ำซ้อนได้จริง</strong>
+          บนรากฐานความมั่นคงปลอดภัยไซเบอร์ระดับผู้เชี่ยวชาญจาก สกมช.
+        </p>
+        <div class="hero-actions intro" style="--i:4">
+          <a href="#contact" class="btn btn-primary">ติดต่อ</a>
+          <a href="#certs" class="btn">ดูประกาศนียบัตร</a>
         </div>
       </div>
 
-      <a href="#about" class="scroll-hint" aria-label="เลื่อนลงไปส่วนเกี่ยวกับ">
-        <span class="scroll-hint-line" aria-hidden="true"></span>
-        SCROLL
+      <dl class="hero-stats intro" style="--i:5">
+        <div><dt>ประกาศนียบัตร</dt><dd><span data-count="14">14</span>+</dd></div>
+        <div><dt>หลักสูตร สกมช.</dt><dd><span data-count="5">5</span></dd></div>
+        <div><dt>เดือนฝึกงาน MEA</dt><dd><span data-count="3">3</span></dd></div>
+      </dl>
+
+      <p class="hero-hint intro" style="--i:6" aria-hidden="true">
+        <span class="hint-fine">ขยับเมาส์เพื่อดึงอนุภาค · กดค้างเพื่อเพิ่มแรงโน้มถ่วง · ปล่อยเพื่อเหวี่ยง</span>
+        <span class="hint-touch">แตะค้างเพื่อดึงอนุภาค · ยกนิ้วเพื่อเหวี่ยง</span>
+      </p>
+
+      <a href="#about" class="scroll-cue intro" style="--i:6" aria-label="เลื่อนลงไปส่วนเกี่ยวกับ">
+        <span aria-hidden="true"></span>SCROLL
       </a>
     </section>
 
-    <!-- ===================== ABOUT ===================== -->
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-head reveal">
+    <!-- ===================== 01 ABOUT ===================== -->
+    <section class="section" id="about" data-formation="1" data-side="left" data-name="เกี่ยวกับ" data-index="01">
+      <div class="section-inner">
+        <header class="section-head reveal">
           <span class="section-index">01</span>
-          <h2 class="section-title">เกี่ยวกับผม</h2>
-        </div>
+          <h2>เกี่ยวกับผม</h2>
+        </header>
 
-        <div class="about-grid">
-          <p class="about-lead reveal">
+        <div class="about-id reveal">
+          <img class="about-photo" src="profile.jpg" alt="ภูผา คงถิ่น" width="800" height="1059" loading="lazy" />
+          <p class="lead">
             นักศึกษาสาขาเทคโนโลยีสารสนเทศที่มุ่งสายงาน <mark>AI &amp; Automation</mark> —
             ออกแบบและสร้างแอปพลิเคชัน AI / agent จากหลายเครื่องมือ (Claude, Gemini)
             และ<mark>ระบบอัตโนมัติที่ลดงานซ้ำซ้อนได้จริง</mark> เช่น pipeline อัตโนมัติจัดการงานแปลมังงะ
-            พัฒนา workflow ด้วย Power Automate และรัน LLM บนเครื่องเอง (Ollama, LM Studio)
-            บนรากฐานความมั่นคงปลอดภัยไซเบอร์ระดับผู้เชี่ยวชาญจาก สกมช. (NCSA)
-            พร้อมทักษะจัดการโปรเจกต์อย่างเป็นระบบจากการฝึกงานในรัฐวิสาหกิจ
           </p>
-
-          <div class="about-edu">
-            <article class="edu-card glass reveal">
-              <span class="edu-tag">กำลังศึกษา</span>
-              <h3>สถาบันเทคโนโลยีไทย-ญี่ปุ่น (TNI)</h3>
-              <p>คณะเทคโนโลยีสารสนเทศ สาขาเทคโนโลยีสารสนเทศ · ชั้นปีที่ 4</p>
-            </article>
-            <article class="edu-card glass reveal">
-              <span class="edu-tag">ปวช.</span>
-              <h3>วิทยาลัยเทคโนโลยีอรรถวิทย์พณิชยการ</h3>
-              <p>ระดับประกาศนียบัตรวิชาชีพ</p>
-            </article>
-          </div>
         </div>
+        <p class="body reveal">
+          พัฒนา workflow ด้วย Power Automate และรัน LLM บนเครื่องเอง (Ollama, LM Studio)
+          บนรากฐานความมั่นคงปลอดภัยไซเบอร์ระดับผู้เชี่ยวชาญจาก สกมช. (NCSA)
+          พร้อมทักษะจัดการโปรเจกต์อย่างเป็นระบบจากการฝึกงานในรัฐวิสาหกิจ
+        </p>
+
+        <ul class="edu reveal">
+          <li>
+            <span class="edu-tag">กำลังศึกษา</span>
+            <strong>สถาบันเทคโนโลยีไทย-ญี่ปุ่น (TNI)</strong>
+            <span>คณะเทคโนโลยีสารสนเทศ สาขาเทคโนโลยีสารสนเทศ · ชั้นปีที่ 4</span>
+          </li>
+          <li>
+            <span class="edu-tag">ปวช.</span>
+            <strong>วิทยาลัยเทคโนโลยีอรรถวิทย์พณิชยการ</strong>
+            <span>ระดับประกาศนียบัตรวิชาชีพ · สำเร็จการศึกษา มี.ค. 2566</span>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- ===================== SKILLS ===================== -->
-    <section class="section" id="skills">
-      <div class="container">
-        <div class="section-head reveal">
+    <!-- ===================== 02 SKILLS ===================== -->
+    <section class="section" id="skills" data-formation="2" data-side="right" data-name="ทักษะ" data-index="02">
+      <div class="section-inner">
+        <header class="section-head reveal">
           <span class="section-index">02</span>
-          <h2 class="section-title">ทักษะ</h2>
+          <h2>ทักษะ</h2>
+        </header>
+
+        <div class="skill-group skill-major reveal">
+          <h3>AI &amp; Automation <span class="chip">จุดแข็งหลัก</span></h3>
+          <ul class="tags">
+            <li>Advanced Prompt Engineering</li>
+            <li>AI App &amp; Agent Development (Claude)</li>
+            <li>Microsoft 365 Copilot</li>
+            <li>Power Automate</li>
+            <li>AI Skills for All</li>
+          </ul>
+          <p class="skill-tools"><span>เครื่องมือ &amp; โมเดล</span> Claude · Claude Code · Google Antigravity · Gemini · Ollama · LM Studio · OpenClaw</p>
         </div>
 
-        <div class="skills-grid">
-          <!-- Featured category: AI & Automation -->
-          <article class="skill-card glass skill-featured reveal">
-            <div class="skill-card-head">
-              <span class="skill-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg>
-              </span>
-              <h3>AI &amp; Automation</h3>
-              <span class="skill-badge">จุดแข็งหลัก</span>
-            </div>
-            <!-- Bars fill on scroll -->
-            <ul class="skill-bars">
-              <li>
-                <div class="bar-label"><span>Advanced Prompt Engineering</span><span class="bar-pct" data-count="90">0</span></div>
-                <div class="bar-track"><div class="bar-fill" style="--w:90%"></div></div>
-              </li>
-              <li>
-                <div class="bar-label"><span>Microsoft 365 Copilot</span><span class="bar-pct" data-count="85">0</span></div>
-                <div class="bar-track"><div class="bar-fill" style="--w:85%"></div></div>
-              </li>
-              <li>
-                <div class="bar-label"><span>Power Automate</span><span class="bar-pct" data-count="80">0</span></div>
-                <div class="bar-track"><div class="bar-fill" style="--w:80%"></div></div>
-              </li>
-              <li>
-                <div class="bar-label"><span>AI Skills for All</span><span class="bar-pct" data-count="85">0</span></div>
-                <div class="bar-track"><div class="bar-fill" style="--w:85%"></div></div>
-              </li>
-              <li>
-                <div class="bar-label"><span>AI App &amp; Agent Development (Claude)</span><span class="bar-pct" data-count="78">0</span></div>
-                <div class="bar-track"><div class="bar-fill" style="--w:78%"></div></div>
-              </li>
-            </ul>
-            <p class="skill-tools-label">เครื่องมือ &amp; โมเดล AI</p>
-            <ul class="skill-tags">
-              <li>Claude</li>
-              <li>Claude Code</li>
-              <li>Google Antigravity</li>
-              <li>Gemini</li>
-              <li>Ollama</li>
-              <li>LM Studio</li>
-              <li>OpenClaw</li>
-            </ul>
-          </article>
+        <div class="skill-group reveal">
+          <h3>Cybersecurity</h3>
+          <ul class="tags">
+            <li>Penetration Testing</li>
+            <li>Cybersecurity Analysis</li>
+            <li>OT Security</li>
+          </ul>
+        </div>
 
-          <article class="skill-card glass reveal">
-            <div class="skill-card-head">
-              <span class="skill-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 3.5v5.7c0 5-3.4 8.6-8 10.8-4.6-2.2-8-5.8-8-10.8V5.5L12 2z"/><path d="M9 12l2 2 4-4.5"/></svg>
-              </span>
-              <h3>Cybersecurity</h3>
-            </div>
-            <ul class="skill-tags">
-              <li>Penetration Testing</li>
-              <li>Cybersecurity Analysis</li>
-              <li>OT Security</li>
-              <li>Cybersecurity Professional Level</li>
-            </ul>
-          </article>
+        <div class="skill-group reveal">
+          <h3>Technical &amp; Development</h3>
+          <ul class="tags">
+            <li>Java (Android Studio)</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Bootstrap</li>
+            <li>Microsoft Excel</li>
+            <li>Power BI</li>
+            <li>E-Commerce</li>
+          </ul>
+        </div>
 
-          <article class="skill-card glass reveal">
-            <div class="skill-card-head">
-              <span class="skill-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>
-              </span>
-              <h3>Technical &amp; Development</h3>
-            </div>
-            <ul class="skill-tags">
-              <li>Java (Android Studio)</li>
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>Bootstrap</li>
-              <li>Microsoft Excel</li>
-              <li>Power BI</li>
-              <li>E-Commerce Website Development</li>
-            </ul>
-          </article>
-
-          <article class="skill-card glass reveal">
-            <div class="skill-card-head">
-              <span class="skill-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c.5-3.5 3.2-5.5 6.5-5.5s6 2 6.5 5.5"/><path d="M16 4.5a3.2 3.2 0 010 7M18.5 14.7c1.9.8 3 2.4 3.2 5.3"/></svg>
-              </span>
-              <h3>Soft Skills</h3>
-            </div>
-            <ul class="skill-tags">
-              <li>การบริหารลำดับความสำคัญของงาน (Prioritization)</li>
-              <li>การประสานงานระหว่างแผนก</li>
-            </ul>
-          </article>
+        <div class="skill-group reveal">
+          <h3>Soft Skills</h3>
+          <ul class="tags">
+            <li>การบริหารลำดับความสำคัญของงาน</li>
+            <li>การประสานงานระหว่างแผนก</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- ===================== PROJECTS ===================== -->
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-index">03</span>
-          <h2 class="section-title">ผลงาน</h2>
-        </div>
+    <!-- ===================== 03 PROJECTS ===================== -->
+    <section id="projects" aria-labelledby="projects-title">
 
-        <article class="project-card glass reveal">
-          <div class="project-video">
-            <iframe
-              src="https://www.youtube.com/embed/HCU_ZVkONLQ"
-              title="ระบบอัตโนมัติสำหรับจัดการ Workflow งานแปลมังงะ (Manga Localization Automation Pipeline)"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen></iframe>
-          </div>
-          <div class="project-info">
-            <span class="project-tag">Automation · AI</span>
-            <h3>ระบบอัตโนมัติจัดการ Workflow งานแปลมังงะ</h3>
-            <p class="project-sub">Manga Localization Automation Pipeline</p>
-            <p class="project-desc">
-              ออกแบบ pipeline อัตโนมัติจัดการขั้นตอนงานแปล/จัดทำมังงะแบบครบวงจร
-              ลดงานแมนนวลหลายขั้นตอน และผสาน AI เข้ากับ workflow
-              เพื่อเร่งความเร็วและความสม่ำเสมอของงาน
-            </p>
-            <a class="btn btn-primary" href="https://www.youtube.com/watch?v=HCU_ZVkONLQ" target="_blank" rel="noopener">ดูวิดีโอ Demo</a>
-          </div>
-        </article>
+      <article class="section" id="manga" data-formation="3" data-side="left" data-name="ผลงาน" data-index="03">
+        <div class="section-inner">
+          <header class="section-head reveal">
+            <span class="section-index">03</span>
+            <h2 id="projects-title">ผลงาน</h2>
+          </header>
 
-        <article class="project-card glass reveal">
-          <a class="project-shot" href="projects/radar-dashboard.jpg" target="_blank" rel="noopener">
-            <img src="projects/radar-dashboard.jpg" alt="แดชบอร์ด Manhwa Radar แสดงตัวกรอง สถิติ และรายการมังฮวาพร้อมเรื่องย่อภาษาไทย" width="1035" height="819" loading="lazy" />
-          </a>
-          <div class="project-info">
-            <span class="project-tag">Automation · Data Pipeline</span>
-            <h3>Manhwa Radar — ระบบเฝ้าติดตามมังฮวาใหม่อัตโนมัติ</h3>
-            <p class="project-sub">Automated New-Release Tracking Pipeline</p>
-            <p class="project-desc">
-              ดึงข้อมูลจาก 6 แหล่ง (MangaUpdates, Naver Series, Lezhin, Kakao Page, Ridi และ X)
-              ตามตารางเวลาอัตโนมัติ กรองรายการซ้ำด้วย fuzzy matching เก็บลง SQLite
-              แล้วสรุปเป็นรายงานรายวันทั้ง HTML และ Markdown พร้อม dashboard เว็บสำหรับค้นย้อนหลัง
-              และแปลเรื่องย่อเป็นภาษาไทยอัตโนมัติด้วย Claude API
-            </p>
-            <p class="project-metrics">
-              <span><strong>22</strong> โมดูล</span>
-              <span><strong>6,488</strong> บรรทัด</span>
-              <span><strong>18</strong> ไฟล์เทส</span>
-            </p>
-            <ul class="skill-tags">
-              <li>Python</li>
-              <li>Playwright</li>
-              <li>Flask</li>
-              <li>SQLite</li>
-              <li>pytest</li>
-              <li>Claude API</li>
-              <li>Task Scheduler</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ===================== EXPERIENCE ===================== -->
-    <section class="section" id="experience">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-index">04</span>
-          <h2 class="section-title">ประสบการณ์</h2>
-        </div>
-
-        <div class="timeline">
-          <article class="timeline-item reveal">
-            <span class="timeline-dot" aria-hidden="true"></span>
-            <div class="timeline-card glass">
-              <span class="timeline-period">นักศึกษาฝึกงาน · 3 เดือน</span>
-              <h3>การไฟฟ้านครหลวง (MEA)</h3>
-              <p>บริหารจัดการลำดับความสำคัญของงานและประสานงานข้ามแผนก เพื่อให้โครงการสำเร็จตามกำหนด</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== CERTIFICATIONS ===================== -->
-    <section class="section" id="certs">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-index">05</span>
-          <h2 class="section-title">ประกาศนียบัตร</h2>
-        </div>
-
-        <div class="cert-group reveal">
-          <h3 class="cert-group-title">
-            <span class="cert-group-icon" aria-hidden="true">◆</span>
-            AI Development — โดย Anthropic
-          </h3>
-          <div class="cert-grid">
-            <article class="cert-card glass reveal" data-cert="certs/claude101.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร Claude 101">
-              <span class="cert-level alt">Anthropic</span>
-              <h4>Claude 101</h4>
-              <p>Anthropic Education</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/claude-platform101.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร Claude Platform 101">
-              <span class="cert-level alt">Anthropic</span>
-              <h4>Claude Platform 101</h4>
-              <p>Anthropic Education</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/claude-code101.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร Claude Code 101">
-              <span class="cert-level alt">Anthropic</span>
-              <h4>Claude Code 101</h4>
-              <p>Anthropic Education</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/subagents.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร Introduction to Subagents">
-              <span class="cert-level alt">Anthropic</span>
-              <h4>Introduction to Subagents</h4>
-              <p>Anthropic Education</p>
-            </article>
-          </div>
-        </div>
-
-        <div class="cert-group reveal">
-          <h3 class="cert-group-title">
-            <span class="cert-group-icon" aria-hidden="true">◇</span>
-            AI &amp; ดิจิทัล — โดย Microsoft &amp; TCS
-          </h3>
-          <div class="cert-grid">
-            <article class="cert-card glass reveal" data-cert="certs/copilot.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร Microsoft 365 Copilot">
-              <span class="cert-level alt">Microsoft</span>
-              <h4>Microsoft 365 Copilot</h4>
-              <p>Microsoft Thailand</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/ai-skills.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร AI Skills for All">
-              <span class="cert-level alt">Microsoft</span>
-              <h4>AI Skills for All</h4>
-              <p>Microsoft Thailand</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/excel.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร Microsoft Excel">
-              <span class="cert-level alt">Microsoft</span>
-              <h4>Microsoft Excel (Advanced Calculation)</h4>
-              <p>Microsoft Thailand</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/tcs-aip.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร TCS Academic Interface Program">
-              <span class="cert-level alt">Competition</span>
-              <h4>TCS Academic Interface Program (AIP): AI &amp; Cyber Security</h4>
-              <p>Tata Consultancy Services (Thailand)</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/ecommerce.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร E-Commerce">
-              <span class="cert-level alt">Course</span>
-              <h4>E-Commerce</h4>
-              <p>การพัฒนาเว็บไซต์พาณิชย์อิเล็กทรอนิกส์</p>
-            </article>
-          </div>
-        </div>
-
-        <div class="cert-group reveal">
-          <h3 class="cert-group-title">
-            <span class="cert-group-icon" aria-hidden="true">◈</span>
-            Cybersecurity — โดย สกมช. (NCSA)
-          </h3>
-          <div class="cert-grid">
-            <article class="cert-card glass reveal" data-cert="certs/pentest.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร Penetration Test">
-              <span class="cert-level">Expert</span>
-              <h4>ผู้เชี่ยวชาญเฉพาะด้านการทดสอบเจาะระบบ</h4>
-              <p>Penetration Test</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/analyst.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร Cybersecurity Analyst">
-              <span class="cert-level">Expert</span>
-              <h4>ผู้เชี่ยวชาญเฉพาะด้านนักวิเคราะห์ความมั่นคงปลอดภัยไซเบอร์</h4>
-              <p>Cybersecurity Analyst</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/professional.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร หลักสูตรระดับผู้เชี่ยวชาญ">
-              <span class="cert-level">Professional</span>
-              <h4>หลักสูตรระดับผู้เชี่ยวชาญ</h4>
-              <p>Professional Course</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/ot-security.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร OT Security">
-              <span class="cert-level">Specialist</span>
-              <h4>ความมั่นคงปลอดภัยไซเบอร์ระบบควบคุมอุตสาหกรรม</h4>
-              <p>OT Security</p>
-            </article>
-            <article class="cert-card glass reveal" data-cert="certs/foundation.jpg" role="button" tabindex="0" aria-label="ดูใบประกาศนียบัตร Foundation Course">
-              <span class="cert-level">Foundation</span>
-              <h4>หลักสูตรระดับพื้นฐาน</h4>
-              <p>Foundation Course</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== CONTACT ===================== -->
-    <section class="section section-contact" id="contact">
-      <div class="container">
-        <div class="contact-box glass reveal">
-          <span class="section-index">06</span>
-          <h2 class="section-title">ติดต่อ</h2>
-
-          <div class="contact-email">
-            <a href="mailto:phuphakongtin@gmail.com" class="email-link">phuphakongtin@gmail.com</a>
-            <button class="btn btn-primary btn-copy" id="copy-email" data-email="phuphakongtin@gmail.com">
-              <span class="copy-label">คัดลอกอีเมล</span>
-              <span class="copy-done" aria-hidden="true">คัดลอกแล้ว ✓</span>
-            </button>
-          </div>
-
-          <p class="contact-phone">
-            <span class="contact-phone-label">โทร</span>
-            <a href="tel:+66922696035">092-269-6035</a>
+          <p class="project-tag reveal">Automation · AI</p>
+          <h3 class="project-title reveal">ระบบอัตโนมัติจัดการ Workflow งานแปลมังงะ</h3>
+          <p class="project-sub reveal">Manga Localization Automation Pipeline</p>
+          <p class="body reveal">
+            ออกแบบ pipeline อัตโนมัติจัดการขั้นตอนงานแปล/จัดทำมังงะแบบครบวงจร
+            ลดงานแมนนวลหลายขั้นตอน และผสาน AI เข้ากับ workflow
+            เพื่อเร่งความเร็วและความสม่ำเสมอของงาน
           </p>
+          <button class="video reveal" type="button" data-yt="HCU_ZVkONLQ" aria-label="เล่นวิดีโอ Demo: Manga Localization Automation Pipeline">
+            <img src="https://i.ytimg.com/vi/HCU_ZVkONLQ/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" />
+            <span class="video-play" aria-hidden="true"></span>
+            <span class="video-label">ดูวิดีโอ Demo</span>
+          </button>
         </div>
+      </article>
+
+      <article class="section" id="radar" data-formation="4" data-side="right" data-name="ผลงาน" data-index="03">
+        <div class="section-inner">
+          <p class="project-tag reveal">Automation · Data Pipeline</p>
+          <h3 class="project-title reveal">Manhwa Radar — ระบบเฝ้าติดตามมังฮวาใหม่อัตโนมัติ</h3>
+          <p class="project-sub reveal">Automated New-Release Tracking Pipeline</p>
+          <p class="body reveal">
+            ดึงข้อมูลจาก 6 แหล่ง (MangaUpdates, Naver Series, Lezhin, Kakao Page, Ridi และ X)
+            ตามตารางเวลาอัตโนมัติ กรองรายการซ้ำด้วย fuzzy matching เก็บลง SQLite
+            แล้วสรุปเป็นรายงานรายวันทั้ง HTML และ Markdown พร้อม dashboard เว็บสำหรับค้นย้อนหลัง
+            และแปลเรื่องย่อเป็นภาษาไทยอัตโนมัติด้วย Claude API
+          </p>
+          <dl class="metrics reveal">
+            <div><dd>22</dd><dt>โมดูล</dt></div>
+            <div><dd>6,488</dd><dt>บรรทัด</dt></div>
+            <div><dd>18</dd><dt>ไฟล์เทส</dt></div>
+          </dl>
+          <ul class="tags reveal">
+            <li>Python</li><li>Playwright</li><li>Flask</li><li>SQLite</li><li>pytest</li><li>Claude API</li><li>Task Scheduler</li>
+          </ul>
+          <button class="shot reveal" type="button" data-lightbox="projects/radar-dashboard.jpg" data-caption="Manhwa Radar — dashboard">
+            <img src="projects/radar-dashboard.jpg" alt="แดชบอร์ด Manhwa Radar แสดงตัวกรอง สถิติ และรายการมังฮวาพร้อมเรื่องย่อภาษาไทย" width="1035" height="819" loading="lazy" />
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===================== 04 EXPERIENCE ===================== -->
+    <section class="section" id="experience" data-formation="5" data-side="left" data-name="ประสบการณ์" data-index="04">
+      <div class="section-inner">
+        <header class="section-head reveal">
+          <span class="section-index">04</span>
+          <h2>ประสบการณ์</h2>
+        </header>
+        <div class="xp reveal">
+          <p class="xp-period">นักศึกษาฝึกงาน · 3 เดือน</p>
+          <h3>การไฟฟ้านครหลวง (MEA)</h3>
+          <p class="body">บริหารจัดการลำดับความสำคัญของงานและประสานงานข้ามแผนก เพื่อให้โครงการสำเร็จตามกำหนด</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 05 CERTIFICATIONS ===================== -->
+    <section class="section section-certs" id="certs" data-formation="6" data-side="left" data-name="ประกาศนียบัตร" data-index="05">
+      <div class="section-inner">
+        <header class="section-head reveal">
+          <span class="section-index">05</span>
+          <h2>ประกาศนียบัตร</h2>
+        </header>
+        <p class="body reveal">14 ใบ · 3 กลุ่มดาว — ชี้ที่รายการหรือดวงดาวเพื่อไฮไลต์ คลิกเพื่อดูใบจริง</p>
+
+        <div class="cert-group reveal">
+          <h3>AI Development — Anthropic</h3>
+          <ul>
+            <li><button class="cert" type="button" data-star="0" data-cert="certs/claude101.jpg"><span>Claude 101</span><em>Anthropic</em></button></li>
+            <li><button class="cert" type="button" data-star="1" data-cert="certs/claude-platform101.jpg"><span>Claude Platform 101</span><em>Anthropic</em></button></li>
+            <li><button class="cert" type="button" data-star="2" data-cert="certs/claude-code101.jpg"><span>Claude Code 101</span><em>Anthropic</em></button></li>
+            <li><button class="cert" type="button" data-star="3" data-cert="certs/subagents.jpg"><span>Introduction to Subagents</span><em>Anthropic</em></button></li>
+          </ul>
+        </div>
+
+        <div class="cert-group reveal">
+          <h3>AI &amp; ดิจิทัล — Microsoft &amp; TCS</h3>
+          <ul>
+            <li><button class="cert" type="button" data-star="4" data-cert="certs/copilot.jpg"><span>Microsoft 365 Copilot</span><em>Microsoft</em></button></li>
+            <li><button class="cert" type="button" data-star="5" data-cert="certs/ai-skills.jpg"><span>AI Skills for All</span><em>Microsoft</em></button></li>
+            <li><button class="cert" type="button" data-star="6" data-cert="certs/excel.jpg"><span>Microsoft Excel (Advanced Calculation)</span><em>Microsoft</em></button></li>
+            <li><button class="cert" type="button" data-star="7" data-cert="certs/tcs-aip.jpg"><span>TCS AIP: AI &amp; Cyber Security</span><em>TCS</em></button></li>
+            <li><button class="cert" type="button" data-star="8" data-cert="certs/ecommerce.jpg"><span>E-Commerce</span><em>Course</em></button></li>
+          </ul>
+        </div>
+
+        <div class="cert-group reveal">
+          <h3>Cybersecurity — สกมช. (NCSA)</h3>
+          <ul>
+            <li><button class="cert" type="button" data-star="9" data-cert="certs/pentest.jpg"><span>ผู้เชี่ยวชาญเฉพาะด้านการทดสอบเจาะระบบ</span><em>Expert</em></button></li>
+            <li><button class="cert" type="button" data-star="10" data-cert="certs/analyst.jpg"><span>ผู้เชี่ยวชาญเฉพาะด้านนักวิเคราะห์ความมั่นคงปลอดภัยไซเบอร์</span><em>Expert</em></button></li>
+            <li><button class="cert" type="button" data-star="11" data-cert="certs/professional.jpg"><span>หลักสูตรระดับผู้เชี่ยวชาญ</span><em>Professional</em></button></li>
+            <li><button class="cert" type="button" data-star="12" data-cert="certs/ot-security.jpg"><span>ความมั่นคงปลอดภัยไซเบอร์ระบบควบคุมอุตสาหกรรม (OT)</span><em>Specialist</em></button></li>
+            <li><button class="cert" type="button" data-star="13" data-cert="certs/foundation.jpg"><span>หลักสูตรระดับพื้นฐาน</span><em>Foundation</em></button></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 06 CONTACT ===================== -->
+    <section class="section section-contact" id="contact" data-formation="7" data-side="center" data-name="ติดต่อ" data-index="06">
+      <div class="contact">
+        <header class="section-head reveal">
+          <span class="section-index">06</span>
+          <h2>ติดต่อ</h2>
+        </header>
+        <a class="contact-email reveal" href="mailto:phuphakongtin@gmail.com">phuphakongtin@gmail.com</a>
+        <div class="contact-actions reveal">
+          <button class="btn btn-primary btn-copy" id="copy-email" type="button" data-email="phuphakongtin@gmail.com">
+            <span class="copy-label">คัดลอกอีเมล</span>
+            <span class="copy-done" aria-hidden="true">คัดลอกแล้ว ✓</span>
+          </button>
+          <a class="btn" href="tel:+66922696035">092-269-6035</a>
+        </div>
+        <p class="contact-resume reveal">
+          Resume <a href="resume.html">ภาษาไทย</a> · <a href="resume-en.html">English</a>
+        </p>
+        <p class="sr-only" id="copy-status" aria-live="polite"></p>
       </div>
     </section>
 
   </main>
 
-  <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
-    <div class="container footer-inner">
-      <p>© 2026 ภูผา คงถิ่น</p>
-      <p class="footer-tag">AI &amp; AUTOMATION · IT @ TNI</p>
-    </div>
+    <p>© 2026 ภูผา คงถิ่น</p>
+    <p>AI &amp; AUTOMATION · IT @ TNI</p>
   </footer>
 
-  <!-- ===================== CERT LIGHTBOX ===================== -->
-  <div class="cert-lightbox" id="cert-lightbox" role="dialog" aria-modal="true" aria-label="รูปใบประกาศนียบัตร" hidden>
-    <button class="cert-lightbox-close" id="cert-lightbox-close" type="button" aria-label="ปิด">
-      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  <!-- ===================== LIGHTBOX ===================== -->
+  <dialog class="lightbox" id="lightbox" aria-label="รูปใบประกาศนียบัตร">
+    <button class="lightbox-close" type="button" aria-label="ปิด">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
-    <figure class="cert-lightbox-inner">
-      <img class="cert-lightbox-img" id="cert-lightbox-img" src="" alt="" />
-      <figcaption class="cert-lightbox-caption" id="cert-lightbox-caption"></figcaption>
+    <figure>
+      <img class="lightbox-img" src="" alt="" />
+      <figcaption class="lightbox-caption"></figcaption>
     </figure>
-  </div>
+  </dialog>
 
-  <script src="script.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
