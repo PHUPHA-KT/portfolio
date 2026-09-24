@@ -659,10 +659,7 @@ main { position: relative; z-index: 3; }
   aspect-ratio: 3 / 4;
   object-fit: cover;
   border-radius: 6px;
-  filter: grayscale(1) contrast(1.08) brightness(0.92);
-  transition: filter 0.8s var(--ease-out);
 }
-.about-photo:hover { filter: grayscale(0.2) contrast(1.02); }
 
 .edu {
   display: grid;
