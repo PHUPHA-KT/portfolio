@@ -4,8 +4,8 @@ import { Stage } from './core/Stage.js';
 import { ParticleSim } from './sim/ParticleSim.js';
 import { Labels } from './ui/Labels.js';
 import {
-  FORMATION_COUNT, HERO, HEX, CONTACT, SIM_SIZES, STARS, RADAR_SOURCES, RADAR_CORE, TIMELINE_NODE,
-  SKILL_RADII, skillCenter, computeLayouts, loaderLayout,
+  FORMATION_COUNT, HERO, HEX, FINQUEST, EXPERIENCE, CERTS, CONTACT, SIM_SIZES, STARS, RADAR_SOURCES, RADAR_CORE,
+  TIMELINE_NODE, SKILL_RADII, BUDGET_SPLIT, skillCenter, budgetArcAnchor, computeLayouts, loaderLayout,
 } from './sim/formations.js';
 
 const nextFrame = () => new Promise((r) => requestAnimationFrame(() => r()));
@@ -116,8 +116,12 @@ export class Experience {
       { formation: 3, text: 'อัตโนมัติ', cls: 'label--major', pos: () => [4.4, 0.55, 0] },
       { formation: 4, text: 'SQLite', cls: 'label--major', pos: () => [RADAR_CORE[0], 0.95, 0] },
       { formation: 4, text: 'Daily digest', pos: () => [4.2, 0.55, 0] },
-      { formation: 5, text: 'MEA · ฝึกงาน 3 เดือน', cls: 'label--major', pos: () => [TIMELINE_NODE[0], 1.3, 0] },
+      { formation: EXPERIENCE, text: 'MEA · ฝึกงาน 3 เดือน', cls: 'label--major', pos: () => [TIMELINE_NODE[0], 1.3, 0] },
+      { formation: FINQUEST, text: 'XP · Level up', cls: 'label--major', pos: () => [0, -4.25, 0] },
     ];
+    BUDGET_SPLIT.forEach(({ label }, i) => {
+      items.push({ formation: FINQUEST, text: label, cls: i === 2 ? 'label--major' : '', pos: (t) => budgetArcAnchor(i, t) });
+    });
     RADAR_SOURCES.forEach((name, j) => {
       items.push({ formation: 4, text: name, cls: 'label--left', pos: () => [-5.1, (j - 2.5) * 0.95, (j - 2.5) * 0.25] });
     });
@@ -128,7 +132,7 @@ export class Experience {
     const names = [...document.querySelectorAll('[data-star]')]
       .sort((a, b) => a.dataset.star - b.dataset.star)
       .map((el) => el.querySelector('span')?.textContent.trim() || '');
-    return STARS.map((local, i) => ({ local, name: names[i] || '' }));
+    return STARS.map((local, i) => ({ local, name: names[i] || '', formation: CERTS }));
   }
 
   resize() {

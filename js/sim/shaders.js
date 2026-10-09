@@ -8,7 +8,7 @@ export const FORMATIONS_GLSL = /* glsl */ `
 struct Target { vec3 p; float k; float glow; float a; float local; };
 
 uniform float uTime;
-uniform vec4 uLayout[8];   // xyz offset, w scale
+uniform vec4 uLayout[9];   // xyz offset, w scale
 uniform vec3 uStars[14];
 uniform float uHoverStar;
 uniform float uHeroSpread;   // horizontal spread of the free drift, follows aspect
@@ -159,7 +159,30 @@ Target fRadar(vec4 s, vec4 q) {
   return Target(p, 2.4, glow, fadeEnds(u), 1.0);
 }
 
-// 5 — experience: a timeline filament with one bright node (MEA).
+// 5 — FinQuest: the app's 50/30/20 doughnut, and an XP bar that levels up.
+Target fFinQuest(vec4 s, vec4 q) {
+  if (q.x < 0.1) return ambient(s, q);
+  float t = uTime;
+  if (q.y < 0.74) {
+    float u = s.x;
+    float seg = u < 0.5 ? 0.0 : (u < 0.8 ? 1.0 : 2.0);
+    float start = seg < 0.5 ? 0.0 : (seg < 1.5 ? 0.5 : 0.8);
+    float len = seg < 0.5 ? 0.5 : (seg < 1.5 ? 0.3 : 0.2);
+    float gap = 0.012;
+    float a = (start + gap + (u - start) / len * (len - 2.0 * gap)) * TAU + t * 0.08 + PI * 0.5;
+    float r = 2.4 + (s.y - 0.5) * 0.55;
+    vec3 p = vec3(cos(a) * r, sin(a) * r, (s.z - 0.5) * 0.25) + randDir(s.w, q.z) * 0.03;
+    p = rotX(p, -0.25);
+    float glow = seg < 0.5 ? 0.15 : (seg < 1.5 ? 0.45 : 0.9);
+    return Target(p, 2.5, glow, 1.0, 1.0);
+  }
+  float fill = fract(t * 0.06);
+  vec3 p = vec3(mix(-2.6, 2.6, s.x), -3.7 + (s.y - 0.5) * 0.16, (s.z - 0.5) * 0.1);
+  bool on = s.x < fill;
+  return Target(p, 2.4, on ? 0.85 : 0.0, on ? 1.0 : 0.35, 1.0);
+}
+
+// 6 — experience: a timeline filament with one bright node (MEA).
 Target fTimeline(vec4 s, vec4 q) {
   if (q.x < 0.12) return ambient(s, q);
   float t = uTime;
@@ -178,7 +201,7 @@ Target fTimeline(vec4 s, vec4 q) {
   return Target(p, 2.2, 0.0, fadeEnds(u), 1.0);
 }
 
-// 6 — certifications: 14 stars + constellation lines (NCSA closes into a shield).
+// 7 — certifications: 14 stars + constellation lines (NCSA closes into a shield).
 Target fCerts(vec4 s, vec4 q) {
   if (q.x < 0.1) return ambient(s, q);
   if (q.y < 0.58) {
@@ -196,7 +219,7 @@ Target fCerts(vec4 s, vec4 q) {
   return Target(p, 2.4, 0.0, 0.55, 1.0);
 }
 
-// 7 — contact: everything falls into a singularity (accretion disk + photon ring).
+// 8 — contact: everything falls into a singularity (accretion disk + photon ring).
 Target fSingularity(vec4 s, vec4 q) {
   if (q.x < 0.06) return ambient(s, q);
   float t = uTime;
@@ -219,8 +242,9 @@ Target formation(float id, vec4 s, vec4 q) {
   if (id < 2.5) return fSkills(s, q);
   if (id < 3.5) return fManga(s, q);
   if (id < 4.5) return fRadar(s, q);
-  if (id < 5.5) return fTimeline(s, q);
-  if (id < 6.5) return fCerts(s, q);
+  if (id < 5.5) return fFinQuest(s, q);
+  if (id < 6.5) return fTimeline(s, q);
+  if (id < 7.5) return fCerts(s, q);
   return fSingularity(s, q);
 }
 

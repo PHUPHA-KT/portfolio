@@ -1,4 +1,4 @@
-const INTERACTIVE = 'a, button, input, textarea, select, label, summary, dialog, iframe, [data-no-gravity]';
+const INTERACTIVE = 'a, button, input, textarea, select, label, summary, dialog, iframe, video, [data-no-gravity]';
 const CHARGE_TIME = 1.2; // seconds to reach full gravity while holding
 
 /**

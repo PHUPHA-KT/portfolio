@@ -8,14 +8,18 @@
  *   2 skills      three orbiting bodies, mass = weight
  *   3 manga       one stream tightening through stations
  *   4 radar       six sources converging into one core
- *   5 experience  timeline filament with one node
- *   6 certs       three constellations (14 stars)
- *   7 contact     singularity / accretion disk
+ *   5 finquest    50/30/20 doughnut + XP bar
+ *   6 experience  timeline filament with one node
+ *   7 certs       three constellations (14 stars)
+ *   8 contact     singularity / accretion disk
  */
-export const FORMATION_COUNT = 8;
+export const FORMATION_COUNT = 9;
 export const HERO = 0;
 export const HEX = 1;
-export const CONTACT = 7;
+export const FINQUEST = 5;
+export const EXPERIENCE = 6;
+export const CERTS = 7;
+export const CONTACT = 8;
 
 /** Particle grid edge per device tier → 16k / 36k / 65k particles. */
 export const SIM_SIZES = [128, 192, 256];
@@ -46,6 +50,20 @@ export function skillCenter(i, t) {
 }
 export const SKILL_RADII = [1.55, 0.85, 0.72];
 
+/** Mirrors fFinQuest(): label anchor just outside the middle of each budget arc. */
+export const BUDGET_SPLIT = [
+  { label: '50% Needs', start: 0, len: 0.5 },
+  { label: '30% Wants', start: 0.5, len: 0.3 },
+  { label: '20% Savings', start: 0.8, len: 0.2 },
+];
+export function budgetArcAnchor(i, t, r = 3.8) {
+  const { start, len } = BUDGET_SPLIT[i];
+  const a = (start + len / 2) * Math.PI * 2 + t * 0.08 + Math.PI / 2;
+  const y = Math.sin(a) * r;
+  // rotX(-0.25), as in the shader
+  return [Math.cos(a) * r, Math.cos(-0.25) * y, Math.sin(-0.25) * y];
+}
+
 /** Camera position + look target per formation. */
 export const CAMERA_PRESETS = [
   { pos: [0, 0, 14], look: [0, 0, 0] },
@@ -53,6 +71,7 @@ export const CAMERA_PRESETS = [
   { pos: [-0.9, 1.3, 13.6], look: [-0.3, 0, 0] },
   { pos: [0.3, -0.5, 14.4], look: [0, 0, 0] },
   { pos: [-0.4, 0.3, 14.2], look: [0, 0, 0] },
+  { pos: [0.4, -0.6, 13.6], look: [0.2, -0.2, 0] },
   { pos: [0.5, 0.8, 13.4], look: [0.3, 0, 0] },
   { pos: [-0.6, -0.2, 14.6], look: [0, 0.1, 0] },
   { pos: [0, 2.2, 12.4], look: [0, 0, 0] },

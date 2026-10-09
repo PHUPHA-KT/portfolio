@@ -34,7 +34,7 @@ export class Labels {
       el.addEventListener('pointerleave', () => bus.emit('cert:hover', { index: -1 }));
       el.addEventListener('click', () => bus.emit('cert:select', { index: i }));
       root.append(el);
-      return { ...star, formation: 6, el, shown: false, interactive: true, pos: () => star.local };
+      return { ...star, el, shown: false, interactive: true, pos: () => star.local };
     });
 
     this.offHover = bus.on('cert:hover', ({ index }) => {
