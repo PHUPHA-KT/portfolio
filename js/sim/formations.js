@@ -9,17 +9,19 @@
  *   3 manga       one stream tightening through stations
  *   4 radar       six sources converging into one core
  *   5 finquest    50/30/20 doughnut + XP bar
- *   6 experience  timeline filament with one node
- *   7 certs       three constellations (14 stars)
- *   8 contact     singularity / accretion disk
+ *   6 tracker     four teammates synced through a realtime core + backup vault
+ *   7 experience  timeline filament with one node
+ *   8 certs       three constellations (14 stars)
+ *   9 contact     singularity / accretion disk
  */
-export const FORMATION_COUNT = 9;
+export const FORMATION_COUNT = 10;
 export const HERO = 0;
 export const HEX = 1;
 export const FINQUEST = 5;
-export const EXPERIENCE = 6;
-export const CERTS = 7;
-export const CONTACT = 8;
+export const TRACKER = 6;
+export const EXPERIENCE = 7;
+export const CERTS = 8;
+export const CONTACT = 9;
 
 /** Particle grid edge per device tier → 16k / 36k / 65k particles. */
 export const SIM_SIZES = [128, 192, 256];
@@ -64,6 +66,14 @@ export function budgetArcAnchor(i, t, r = 3.8) {
   return [Math.cos(a) * r, Math.cos(-0.25) * y, Math.sin(-0.25) * y];
 }
 
+/** Mirrors teammate() in GLSL. */
+export function teammate(i, t) {
+  const a = Math.PI * 0.25 + i * Math.PI * 0.5 + t * 0.05;
+  return [Math.cos(a) * 3.6, Math.sin(a) * 2.4 + 0.4, Math.sin(a + 1.3) * 0.6];
+}
+export const TRACKER_CORE = [0, 0.4, 0];
+export const TRACKER_VAULT = [0, -3.6, 0];
+
 /** Camera position + look target per formation. */
 export const CAMERA_PRESETS = [
   { pos: [0, 0, 14], look: [0, 0, 0] },
@@ -72,6 +82,7 @@ export const CAMERA_PRESETS = [
   { pos: [0.3, -0.5, 14.4], look: [0, 0, 0] },
   { pos: [-0.4, 0.3, 14.2], look: [0, 0, 0] },
   { pos: [0.4, -0.6, 13.6], look: [0.2, -0.2, 0] },
+  { pos: [-0.5, 0.5, 13.8], look: [-0.2, 0, 0] },
   { pos: [0.5, 0.8, 13.4], look: [0.3, 0, 0] },
   { pos: [-0.6, -0.2, 14.6], look: [0, 0.1, 0] },
   { pos: [0, 2.2, 12.4], look: [0, 0, 0] },

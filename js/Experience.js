@@ -4,8 +4,8 @@ import { Stage } from './core/Stage.js';
 import { ParticleSim } from './sim/ParticleSim.js';
 import { Labels } from './ui/Labels.js';
 import {
-  FORMATION_COUNT, HERO, HEX, FINQUEST, EXPERIENCE, CERTS, CONTACT, SIM_SIZES, STARS, RADAR_SOURCES, RADAR_CORE,
-  TIMELINE_NODE, SKILL_RADII, BUDGET_SPLIT, skillCenter, budgetArcAnchor, computeLayouts, loaderLayout,
+  FORMATION_COUNT, HERO, HEX, FINQUEST, TRACKER, EXPERIENCE, CERTS, CONTACT, SIM_SIZES, STARS, RADAR_SOURCES, RADAR_CORE,
+  TIMELINE_NODE, SKILL_RADII, BUDGET_SPLIT, skillCenter, budgetArcAnchor, teammate, TRACKER_CORE, TRACKER_VAULT, computeLayouts, loaderLayout,
 } from './sim/formations.js';
 
 const nextFrame = () => new Promise((r) => requestAnimationFrame(() => r()));
@@ -118,6 +118,9 @@ export class Experience {
       { formation: 4, text: 'Daily digest', pos: () => [4.2, 0.55, 0] },
       { formation: EXPERIENCE, text: 'MEA · ฝึกงาน 3 เดือน', cls: 'label--major', pos: () => [TIMELINE_NODE[0], 1.3, 0] },
       { formation: FINQUEST, text: 'XP · Level up', cls: 'label--major', pos: () => [0, -4.25, 0] },
+      { formation: TRACKER, text: 'Supabase · realtime', cls: 'label--major label--right', pos: () => [TRACKER_CORE[0] + 0.7, TRACKER_CORE[1], 0] },
+      { formation: TRACKER, text: 'Nightly backup', pos: () => [TRACKER_VAULT[0], TRACKER_VAULT[1] - 0.55, 0] },
+      { formation: TRACKER, text: '4 teammates', pos: (t) => { const m = teammate(1, t); return [m[0], m[1] + 0.8, m[2]]; } },
     ];
     BUDGET_SPLIT.forEach(({ label }, i) => {
       items.push({ formation: FINQUEST, text: label, cls: i === 2 ? 'label--major' : '', pos: (t) => budgetArcAnchor(i, t) });

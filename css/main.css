@@ -747,6 +747,8 @@ main { position: relative; z-index: 3; }
 }
 .project-sub { margin: 6px 0 0; font-size: 14px; color: var(--faint); }
 
+.project-links { margin: 20px 0 0; }
+
 .video, .shot {
   position: relative;
   display: block;

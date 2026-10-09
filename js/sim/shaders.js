@@ -8,7 +8,7 @@ export const FORMATIONS_GLSL = /* glsl */ `
 struct Target { vec3 p; float k; float glow; float a; float local; };
 
 uniform float uTime;
-uniform vec4 uLayout[9];   // xyz offset, w scale
+uniform vec4 uLayout[10];   // xyz offset, w scale
 uniform vec3 uStars[14];
 uniform float uHoverStar;
 uniform float uHeroSpread;   // horizontal spread of the free drift, follows aspect
@@ -182,7 +182,49 @@ Target fFinQuest(vec4 s, vec4 q) {
   return Target(p, 2.4, on ? 0.85 : 0.0, on ? 1.0 : 0.35, 1.0);
 }
 
-// 6 — experience: a timeline filament with one bright node (MEA).
+// 6 — Team Story Tracker: four teammates kept in sync through one realtime
+// core, which drops a backup packet into an off-site vault.
+vec3 teammate(float i, float t) {
+  float a = PI * 0.25 + i * PI * 0.5 + t * 0.05;
+  return vec3(cos(a) * 3.6, sin(a) * 2.4 + 0.4, sin(a + 1.3) * 0.6);
+}
+
+Target fTracker(vec4 s, vec4 q) {
+  if (q.x < 0.1) return ambient(s, q);
+  float t = uTime;
+  vec3 core = vec3(0.0, 0.4, 0.0);
+  vec3 vault = vec3(0.0, -3.6, 0.0);
+  if (q.y < 0.14) {
+    vec3 p = core + rotY(randDir(s.x, s.y) * 0.6 * pow(s.z, 0.5), t * 0.5);
+    return Target(p, 2.8, 0.85, 1.0, 1.0);
+  }
+  vec3 m = teammate(floor(s.x * 4.0), t);
+  if (q.y < 0.36) {
+    return Target(m + randDir(s.y, s.z) * 0.42 * pow(s.w, 0.6), 2.6, 0.3, 1.0, 1.0);
+  }
+  if (q.y < 0.84) {
+    // Realtime sync: half of each link flows out, half flows back; the two
+    // directions bow to opposite sides so both lanes read.
+    float u = fract(s.y + t * 0.22);
+    bool outward = s.z < 0.5;
+    vec3 a = outward ? core : m;
+    vec3 b = outward ? m : core;
+    vec3 side = normalize(cross(b - a, vec3(0.0, 0.0, 1.0)) + 1e-5);
+    vec3 p = mix(a, b, u) + side * sin(u * PI) * 0.2 + randDir(s.w, q.z) * 0.05;
+    return Target(p, 2.4, outward ? 0.5 : 0.15, fadeEnds(u), 1.0);
+  }
+  if (q.y < 0.92) {
+    float u = fract(t * 0.18 + s.y * 0.12);
+    return Target(mix(core, vault, u) + randDir(s.z, s.w) * 0.06, 2.4, 0.6, fadeEnds(u), 1.0);
+  }
+  // Vault outline
+  vec2 e = s.w < 0.6
+    ? vec2((s.y - 0.5) * 1.6, s.z < 0.5 ? -0.28 : 0.28)
+    : vec2(s.z < 0.5 ? -0.8 : 0.8, (s.y - 0.5) * 0.56);
+  return Target(vault + vec3(e, (q.z - 0.5) * 0.15), 2.8, 0.35, 1.0, 1.0);
+}
+
+// 7 — experience: a timeline filament with one bright node (MEA).
 Target fTimeline(vec4 s, vec4 q) {
   if (q.x < 0.12) return ambient(s, q);
   float t = uTime;
@@ -201,7 +243,7 @@ Target fTimeline(vec4 s, vec4 q) {
   return Target(p, 2.2, 0.0, fadeEnds(u), 1.0);
 }
 
-// 7 — certifications: 14 stars + constellation lines (NCSA closes into a shield).
+// 8 — certifications: 14 stars + constellation lines (NCSA closes into a shield).
 Target fCerts(vec4 s, vec4 q) {
   if (q.x < 0.1) return ambient(s, q);
   if (q.y < 0.58) {
@@ -219,7 +261,7 @@ Target fCerts(vec4 s, vec4 q) {
   return Target(p, 2.4, 0.0, 0.55, 1.0);
 }
 
-// 8 — contact: everything falls into a singularity (accretion disk + photon ring).
+// 9 — contact: everything falls into a singularity (accretion disk + photon ring).
 Target fSingularity(vec4 s, vec4 q) {
   if (q.x < 0.06) return ambient(s, q);
   float t = uTime;
@@ -243,8 +285,9 @@ Target formation(float id, vec4 s, vec4 q) {
   if (id < 3.5) return fManga(s, q);
   if (id < 4.5) return fRadar(s, q);
   if (id < 5.5) return fFinQuest(s, q);
-  if (id < 6.5) return fTimeline(s, q);
-  if (id < 7.5) return fCerts(s, q);
+  if (id < 6.5) return fTracker(s, q);
+  if (id < 7.5) return fTimeline(s, q);
+  if (id < 8.5) return fCerts(s, q);
   return fSingularity(s, q);
 }
 
