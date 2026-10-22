@@ -558,6 +558,13 @@ main { position: relative; z-index: 3; }
   }
   .hero-stats div { align-items: center; }
   .hero { grid-template-rows: 1fr auto auto; }
+  .eyebrow {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 8px;
+    letter-spacing: 0.24em;
+  }
+  .eyebrow::before, .eyebrow::after { display: none; }
   .hero-role { text-wrap: balance; }
   .hero-hint {
     position: static;
@@ -679,7 +686,7 @@ main { position: relative; z-index: 3; }
   border-bottom: 1px solid var(--line);
 }
 .edu strong { font: 400 16px/1.5 var(--display); }
-.edu span { font-size: 14px; color: var(--muted); }
+.edu li > span { font-size: 14px; color: var(--muted); }
 .edu .edu-tag {
   font: 400 11px/1.6 var(--display);
   letter-spacing: 0.16em;
@@ -725,7 +732,7 @@ main { position: relative; z-index: 3; }
 }
 .skill-major .tags li { color: var(--fg); border-color: var(--line-strong); }
 .skill-tools { margin: 14px 0 0; font-size: 13px; color: var(--muted); }
-.skill-tools span {
+.skill-tools > span:first-child {
   display: block;
   font: 400 11px/1.8 var(--display);
   letter-spacing: 0.14em;
@@ -894,7 +901,22 @@ main { position: relative; z-index: 3; }
 .btn-copy .copy-label { transition: opacity 0.3s; }
 .btn-copy.is-copied .copy-label { opacity: 0; }
 .btn-copy.is-copied .copy-done { opacity: 1; }
-.contact-resume { margin: 26px 0 0; font-size: 14px; color: var(--faint); }
+.contact-resume {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 36px;
+  margin: 30px 0 0;
+  font-size: 14px;
+  color: var(--faint);
+}
+.contact-resume div { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.contact-resume dt {
+  font: 400 11px/1.6 var(--display);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.contact-resume dd { margin: 0; }
 .contact-resume a { color: var(--muted); text-underline-offset: 4px; }
 .contact-resume a:hover { color: var(--accent); }
 

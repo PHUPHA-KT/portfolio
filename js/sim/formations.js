@@ -6,10 +6,10 @@
  *   0 hero        free drift
  *   1 about       hexagon brand mark
  *   2 skills      three orbiting bodies, mass = weight
- *   3 manga       one stream tightening through stations
+ *   3 tracker     four teammates synced through a realtime core + backup vault
  *   4 radar       six sources converging into one core
  *   5 finquest    50/30/20 doughnut + XP bar
- *   6 tracker     four teammates synced through a realtime core + backup vault
+ *   6 manga       one stream tightening through stations
  *   7 experience  timeline filament with one node
  *   8 certs       three constellations (14 stars)
  *   9 contact     singularity / accretion disk
@@ -17,8 +17,10 @@
 export const FORMATION_COUNT = 10;
 export const HERO = 0;
 export const HEX = 1;
+export const TRACKER = 3;
+export const RADAR = 4;
 export const FINQUEST = 5;
-export const TRACKER = 6;
+export const MANGA = 6;
 export const EXPERIENCE = 7;
 export const CERTS = 8;
 export const CONTACT = 9;
@@ -50,7 +52,7 @@ export function skillCenter(i, t) {
   const a = t * 0.27 + 2.4;
   return [Math.cos(a) * 3.1, -Math.sin(a) * 1.6 - 0.4, Math.sin(a) * 2.4];
 }
-export const SKILL_RADII = [1.55, 0.85, 0.72];
+export const SKILL_RADII = [1.55, 0.98, 0.72];
 
 /** Mirrors fFinQuest(): label anchor just outside the middle of each budget arc. */
 export const BUDGET_SPLIT = [
@@ -79,10 +81,10 @@ export const CAMERA_PRESETS = [
   { pos: [0, 0, 14], look: [0, 0, 0] },
   { pos: [0.8, 0.4, 13.2], look: [0.5, 0, 0] },
   { pos: [-0.9, 1.3, 13.6], look: [-0.3, 0, 0] },
-  { pos: [0.3, -0.5, 14.4], look: [0, 0, 0] },
+  { pos: [-0.5, 0.5, 13.8], look: [-0.2, 0, 0] },
   { pos: [-0.4, 0.3, 14.2], look: [0, 0, 0] },
   { pos: [0.4, -0.6, 13.6], look: [0.2, -0.2, 0] },
-  { pos: [-0.5, 0.5, 13.8], look: [-0.2, 0, 0] },
+  { pos: [0.3, -0.5, 14.4], look: [0, 0, 0] },
   { pos: [0.5, 0.8, 13.4], look: [0.3, 0, 0] },
   { pos: [-0.6, -0.2, 14.6], look: [0, 0.1, 0] },
   { pos: [0, 2.2, 12.4], look: [0, 0, 0] },

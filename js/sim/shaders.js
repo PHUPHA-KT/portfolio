@@ -79,7 +79,7 @@ Target fHex(vec4 s, vec4 q) {
   return Target(p, 2.4, glow, 1.0, 1.0);
 }
 
-// 2 — skills: a dominant body (AI & Automation) with two orbiting satellites.
+// 2 — skills: a dominant body (AI & Automation) with Software Dev and Cybersecurity in orbit.
 vec3 skillCenter(float i, float t) {
   if (i < 0.5) return vec3(0.0);
   if (i < 1.5) { float a = t * 0.2; return vec3(cos(a) * 4.4, sin(a) * 1.3, sin(a) * 3.2); }
@@ -90,8 +90,9 @@ vec3 skillCenter(float i, float t) {
 Target fSkills(vec4 s, vec4 q) {
   if (q.x < 0.1) return ambient(s, q);
   float t = uTime;
-  float i = q.y < 0.6 ? 0.0 : (q.y < 0.81 ? 1.0 : 2.0);
-  float R = i < 0.5 ? 1.55 : (i < 1.5 ? 0.85 : 0.72);
+  // 0 = AI & Automation (main body), 1 = Software Dev, 2 = Cybersecurity
+  float i = q.y < 0.55 ? 0.0 : (q.y < 0.8 ? 1.0 : 2.0);
+  float R = i < 0.5 ? 1.55 : (i < 1.5 ? 0.98 : 0.72);
   vec3 p;
   if (i < 0.5 && s.x < 0.28) {
     float a = s.y * TAU + t * 0.35;
@@ -102,7 +103,7 @@ Target fSkills(vec4 s, vec4 q) {
   return Target(p, 2.2, i < 0.5 ? 0.1 : 0.18, i < 0.5 ? 1.0 : 0.8, 1.0);
 }
 
-// 3 — manga pipeline: a chaotic stream that tightens through three stations.
+// 6 — manga pipeline: a chaotic stream that tightens through three stations.
 Target fManga(vec4 s, vec4 q) {
   if (q.x < 0.1) return ambient(s, q);
   float t = uTime;
@@ -182,7 +183,7 @@ Target fFinQuest(vec4 s, vec4 q) {
   return Target(p, 2.4, on ? 0.85 : 0.0, on ? 1.0 : 0.35, 1.0);
 }
 
-// 6 — Team Story Tracker: four teammates kept in sync through one realtime
+// 3 — Team Story Tracker: four teammates kept in sync through one realtime
 // core, which drops a backup packet into an off-site vault.
 vec3 teammate(float i, float t) {
   float a = PI * 0.25 + i * PI * 0.5 + t * 0.05;
@@ -282,10 +283,10 @@ Target formation(float id, vec4 s, vec4 q) {
   if (id < 0.5) return fHero(s, q);
   if (id < 1.5) return fHex(s, q);
   if (id < 2.5) return fSkills(s, q);
-  if (id < 3.5) return fManga(s, q);
+  if (id < 3.5) return fTracker(s, q);
   if (id < 4.5) return fRadar(s, q);
   if (id < 5.5) return fFinQuest(s, q);
-  if (id < 6.5) return fTracker(s, q);
+  if (id < 6.5) return fManga(s, q);
   if (id < 7.5) return fTimeline(s, q);
   if (id < 8.5) return fCerts(s, q);
   return fSingularity(s, q);

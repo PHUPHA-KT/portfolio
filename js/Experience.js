@@ -4,7 +4,7 @@ import { Stage } from './core/Stage.js';
 import { ParticleSim } from './sim/ParticleSim.js';
 import { Labels } from './ui/Labels.js';
 import {
-  FORMATION_COUNT, HERO, HEX, FINQUEST, TRACKER, EXPERIENCE, CERTS, CONTACT, SIM_SIZES, STARS, RADAR_SOURCES, RADAR_CORE,
+  FORMATION_COUNT, HERO, HEX, TRACKER, RADAR, FINQUEST, MANGA, EXPERIENCE, CERTS, CONTACT, SIM_SIZES, STARS, RADAR_SOURCES, RADAR_CORE,
   TIMELINE_NODE, SKILL_RADII, BUDGET_SPLIT, skillCenter, budgetArcAnchor, teammate, TRACKER_CORE, TRACKER_VAULT, computeLayouts, loaderLayout,
 } from './sim/formations.js';
 
@@ -110,12 +110,12 @@ export class Experience {
     };
     const items = [
       { formation: 2, text: 'AI & Automation', cls: 'label--major', pos: up(0) },
-      { formation: 2, text: 'Cybersecurity', pos: up(1) },
-      { formation: 2, text: 'Technical', pos: up(2) },
-      { formation: 3, text: 'งานแมนนวล', pos: () => [-4.4, 1.7, 0] },
-      { formation: 3, text: 'อัตโนมัติ', cls: 'label--major', pos: () => [4.4, 0.55, 0] },
-      { formation: 4, text: 'SQLite', cls: 'label--major', pos: () => [RADAR_CORE[0], 0.95, 0] },
-      { formation: 4, text: 'Daily digest', pos: () => [4.2, 0.55, 0] },
+      { formation: 2, text: 'Software Dev', pos: up(1) },
+      { formation: 2, text: 'Cybersecurity', pos: up(2) },
+      { formation: MANGA, text: 'งานแมนนวล', pos: () => [-4.4, 1.7, 0] },
+      { formation: MANGA, text: 'อัตโนมัติ', cls: 'label--major', pos: () => [4.4, 0.55, 0] },
+      { formation: RADAR, text: 'SQLite', cls: 'label--major', pos: () => [RADAR_CORE[0], 0.95, 0] },
+      { formation: RADAR, text: 'Daily digest', pos: () => [4.2, 0.55, 0] },
       { formation: EXPERIENCE, text: 'MEA · ฝึกงาน 3 เดือน', cls: 'label--major', pos: () => [TIMELINE_NODE[0], 1.3, 0] },
       { formation: FINQUEST, text: 'XP · Level up', cls: 'label--major', pos: () => [0, -4.25, 0] },
       { formation: TRACKER, text: 'Supabase · realtime', cls: 'label--major label--right', pos: () => [TRACKER_CORE[0] + 0.7, TRACKER_CORE[1], 0] },
@@ -126,7 +126,7 @@ export class Experience {
       items.push({ formation: FINQUEST, text: label, cls: i === 2 ? 'label--major' : '', pos: (t) => budgetArcAnchor(i, t) });
     });
     RADAR_SOURCES.forEach((name, j) => {
-      items.push({ formation: 4, text: name, cls: 'label--left', pos: () => [-5.1, (j - 2.5) * 0.95, (j - 2.5) * 0.25] });
+      items.push({ formation: RADAR, text: name, cls: 'label--left', pos: () => [-5.1, (j - 2.5) * 0.95, (j - 2.5) * 0.25] });
     });
     return items;
   }
