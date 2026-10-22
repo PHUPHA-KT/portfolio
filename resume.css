@@ -66,6 +66,33 @@ strong { color: var(--text-hi); font-weight: 500; }
 .tool-btn.primary:hover { background: rgba(0, 229, 255, 0.1); }
 .toolbar-spacer { margin-right: auto; }
 
+/* ---------- Track variants (AI & Automation / Software Developer) ---------- */
+[data-track="ai"] [data-only="dev"],
+[data-track="dev"] [data-only="ai"] { display: none !important; }
+
+.r-projects { display: flex; flex-direction: column; gap: 12px; }
+.r-skills { display: flex; flex-direction: column; gap: 9px; }
+.r-projects > .entry + .entry,
+.r-skills > .skill-row + .skill-row { margin-top: 0; }
+[data-track="ai"] .r-projects > *, [data-track="ai"] .r-skills > * { order: var(--ai); }
+[data-track="dev"] .r-projects > *, [data-track="dev"] .r-skills > * { order: var(--dev); }
+
+.track-switch {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-1);
+}
+.track-switch a {
+  padding: 6px 12px;
+  border-radius: 7px;
+  font-size: 9.5pt;
+  color: var(--text-mid);
+  transition: color 200ms, background 200ms;
+}
+.track-switch a:hover { color: var(--text-hi); }
+.track-switch a[aria-current="page"] { background: rgba(0, 229, 255, 0.12); color: var(--accent); }
 /* ---------- The sheet ---------- */
 /* Keep Thai phrases intact — the browser's Thai line breaking can split words. */
 .nw { white-space: nowrap; }
@@ -244,19 +271,18 @@ strong { color: var(--text-hi); font-weight: 500; }
 /* ============================================================
    Narrow screens: stack the two columns
    ============================================================ */
-@media (max-width: 700px) {
+@media screen and (max-width: 700px) {
   body { padding: 20px 12px 48px; font-size: 11pt; }
   :root { --sheet-pad: 24px 20px; }
-  /* Keep Thai phrases intact — the browser's Thai line breaking can split words. */
-.nw { white-space: nowrap; }
-
-.sheet { min-height: 0; }
+  .sheet { min-height: 0; }
   .r-body { grid-template-columns: 1fr; gap: 0; }
   .r-side { margin-top: 18px; }
   .r-contact { text-align: left; }
   .toolbar { justify-content: stretch; }
   .toolbar-spacer { display: none; }
   .tool-btn { flex: 1; }
+  .track-switch { width: 100%; }
+  .track-switch a { flex: 1; text-align: center; }
 }
 
 /* ============================================================
@@ -290,10 +316,7 @@ strong { color: var(--text-hi); font-weight: 500; }
 
   .toolbar, .no-print { display: none !important; }
 
-  /* Keep Thai phrases intact — the browser's Thai line breaking can split words. */
-.nw { white-space: nowrap; }
-
-.sheet {
+  .sheet {
     width: auto;
     min-height: 0;
     margin: 0;
@@ -324,8 +347,8 @@ strong { color: var(--text-hi); font-weight: 500; }
   .entry-when { font-size: 8.5pt; }
   .skill-name { font-size: 9pt; }
   .skill-list { line-height: 1.35; }
-  .skill-row + .skill-row { margin-top: 6px; }
-  .r-proj + .r-proj { margin-top: 8px; }
+  .r-skills { gap: 6px; }
+  .r-projects { gap: 8px; }
   .r-foot { margin-top: 14px; padding-top: 9px; font-size: 8.5pt; }
   .r-qr img { width: 22mm; height: 22mm; padding: 0; }
   .r-qr figcaption { font-size: 7pt; }

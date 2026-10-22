@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-track="ai">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Resume — Phupha Kongtin | AI &amp; Automation</title>
-  <meta name="description" content="Resume of Phupha Kongtin, Information Technology student at Thai-Nichi Institute of Technology — AI &amp; automation, with expert-level cybersecurity training from NCSA." />
+  <meta name="description" content="Resume of Phupha Kongtin, Information Technology student at Thai-Nichi Institute of Technology — AI &amp; automation and software development." />
   <meta name="theme-color" content="#0a0a0f" />
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpolygon points='16,2 29,9.5 29,24.5 16,30 3,24.5 3,9.5' fill='none' stroke='%2300e5ff' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%2300e5ff'/%3E%3C/svg%3E" />
@@ -15,14 +15,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="resume.css" />
+  <script src="resume-track.js"></script>
 </head>
 <body>
 
   <!-- Screen-only controls; hidden when printing -->
   <div class="toolbar no-print">
     <a href="index.html" class="tool-btn toolbar-spacer">← Back to Portfolio</a>
-    <a href="resume.html" class="tool-btn">ภาษาไทย</a>
-    <button class="tool-btn primary" onclick="window.print()">Print / Save as PDF</button>
+    <nav class="track-switch" aria-label="Choose a track">
+      <a href="?track=ai" data-track-link="ai">AI &amp; Automation</a>
+      <a href="?track=dev" data-track-link="dev">Software Developer</a>
+    </nav>
+    <a href="resume.html" class="tool-btn" data-keep-track>ภาษาไทย</a>
+    <button class="tool-btn primary" type="button" onclick="window.print()">Print / Save as PDF</button>
   </div>
 
   <article class="sheet">
@@ -33,21 +38,30 @@
         <img class="r-photo" src="profile.jpg" alt="Phupha Kongtin" width="800" height="1059" />
         <div>
           <h1 class="r-name">Phupha Kongtin</h1>
-          <p class="r-title">AI &amp; AUTOMATION ENGINEER</p>
+          <p class="r-title">
+            <span data-only="ai">AI &amp; AUTOMATION DEVELOPER</span>
+            <span data-only="dev">SOFTWARE DEVELOPER&nbsp;· WEB</span>
+          </p>
         </div>
       </div>
       <ul class="r-contact">
         <li><span class="label">Phone</span><a href="tel:+66922696035">092-269-6035</a></li>
         <li><span class="label">Email</span><a href="mailto:phuphakongtin@gmail.com">phuphakongtin@gmail.com</a></li>
-        <li><span class="label">Location</span>Samut Prakan, Thailand</li>
-        <li><span class="label">Education</span>TNI&nbsp;· <span class="nw">4th year</span></li>
+        <li><span class="label">GitHub</span><a href="https://github.com/PHUPHA-KT">github.com/PHUPHA-KT</a></li>
+        <li><span class="label">Location</span>Samut Prakan, Thailand&nbsp;· TNI <span class="nw">4th year</span></li>
       </ul>
     </header>
 
-    <p class="r-summary">
+    <p class="r-summary" data-only="ai">
       Final-year IT student targeting <em><span class="nw">AI &amp; Automation</span></em> roles&nbsp;— builds <span class="nw">AI apps / agents</span>
-      and automation pipelines that <em>cut repetitive work</em> (e.g. an automated
-      <span class="nw">manga-localization</span> pipeline), on a foundation of <span class="nw">expert-level</span> cybersecurity training <span class="nw">from NCSA.</span>
+      and automation pipelines that <em>cut repetitive work</em>, such as a six-source release tracker that translates
+      synopses with the <span class="nw">Claude API</span>. Solid web development foundation and <span class="nw">expert-level</span>
+      cybersecurity training <span class="nw">from NCSA.</span>
+    </p>
+    <p class="r-summary" data-only="dev">
+      Final-year IT student targeting <em><span class="nw">software development</span></em> roles&nbsp;— ships <em>web apps a team uses every day</em>
+      (realtime sync, <span class="nw">row-level security</span>, tests and CI-driven backups) and Python backends,
+      using AI tools deliberately to move faster. <span class="nw">Expert-level</span> cybersecurity training <span class="nw">from NCSA.</span>
     </p>
 
     <div class="r-body">
@@ -72,49 +86,56 @@
 
         <section>
           <h2 class="r-h2">Projects</h2>
-          <div class="entry r-proj">
-            <div class="entry-top">
-              <h3 class="entry-org">Manga Localization Automation Pipeline</h3>
-              <span class="entry-when">Automation</span>
+          <!-- Order per track: --ai / --dev -->
+          <div class="r-projects">
+            <div class="entry r-proj" style="--ai: 2; --dev: 4">
+              <div class="entry-top">
+                <h3 class="entry-org">Manga Localization Automation Pipeline</h3>
+                <span class="entry-when">Automation</span>
+              </div>
+              <p class="entry-role">Personal project&nbsp;· AI + workflow automation</p>
+              <ul class="entry-desc">
+                <li>End-to-end automated pipeline for the manga <span class="nw">translation / production</span> workflow, cutting many <span class="nw">manual steps</span></li>
+                <li>Integrated AI to speed up throughput and keep output consistent</li>
+              </ul>
             </div>
-            <p class="entry-role">Personal project&nbsp;· AI + workflow automation</p>
-            <ul class="entry-desc">
-              <li>End-to-end automated pipeline for the manga <span class="nw">translation / production</span> workflow, cutting many <span class="nw">manual steps</span></li>
-              <li>Integrated AI to speed up throughput and keep output consistent</li>
-            </ul>
-          </div>
-          <div class="entry r-proj">
-            <div class="entry-top">
-              <h3 class="entry-org">Manhwa Radar&nbsp;— Automated Release Tracker</h3>
-              <span class="entry-when">Automation</span>
+
+            <div class="entry r-proj" style="--ai: 1; --dev: 2">
+              <div class="entry-top">
+                <h3 class="entry-org">Manhwa Radar&nbsp;— Automated Release Tracker</h3>
+                <span class="entry-when">Automation</span>
+              </div>
+              <p class="entry-role">Python&nbsp;· Playwright&nbsp;· Flask&nbsp;· SQLite&nbsp;· pytest&nbsp;· <span class="nw">Claude API</span></p>
+              <ul class="entry-desc">
+                <li>Scheduled scraping of six sources, <span class="nw">fuzzy-matched</span> dedupe into SQLite, daily digests and a web dashboard</li>
+                <li data-only="ai">Automatic Thai translation of synopses via the <span class="nw">Claude API</span>&nbsp;· 22 modules, 6,488 lines, 18 test files</li>
+                <li data-only="dev">22 modules, 6,488 lines, covered by 18 pytest files; synopses translated to Thai via the <span class="nw">Claude API</span></li>
+              </ul>
             </div>
-            <p class="entry-role">Python&nbsp;· Playwright&nbsp;· Flask&nbsp;· SQLite&nbsp;· pytest</p>
-            <ul class="entry-desc">
-              <li>Scheduled scraping of six sources, <span class="nw">fuzzy-matched</span> dedupe into SQLite, daily digests and a web dashboard</li>
-              <li>Automatic Thai translation of synopses via the <span class="nw">Claude API</span></li>
-            </ul>
-          </div>
-          <div class="entry r-proj">
-            <div class="entry-top">
-              <h3 class="entry-org">FinQuest&nbsp;— Gamified Personal Finance App</h3>
-              <span class="entry-when">Mobile App</span>
+
+            <div class="entry r-proj" style="--ai: 4; --dev: 3">
+              <div class="entry-top">
+                <h3 class="entry-org">FinQuest&nbsp;— Gamified Personal Finance App</h3>
+                <span class="entry-when">Mobile App</span>
+              </div>
+              <p class="entry-role">Two-person team project&nbsp;· with Phuminan Kuroda</p>
+              <ul class="entry-desc">
+                <li>Income/expense logging with a real-time balance, doughnut chart, and <span class="nw">Level &amp; XP</span> daily missions to build saving habits</li>
+                <li>Financial Clinic based on the 50/30/20 rule, bill splitter with receipt photos, TH/EN and dark/light themes</li>
+              </ul>
             </div>
-            <p class="entry-role">Two-person team project&nbsp;· with Phuminan Kuroda</p>
-            <ul class="entry-desc">
-              <li>Income/expense logging with a real-time balance, doughnut chart, and <span class="nw">Level &amp; XP</span> daily missions to build saving habits</li>
-              <li>Financial Clinic based on the 50/30/20 rule, bill splitter with receipt photos, TH/EN and dark/light themes</li>
-            </ul>
-          </div>
-          <div class="entry r-proj">
-            <div class="entry-top">
-              <h3 class="entry-org">Team Story Tracker&nbsp;— Shared Translation Workspace</h3>
-              <span class="entry-when">Web App</span>
+
+            <div class="entry r-proj" style="--ai: 3; --dev: 1">
+              <div class="entry-top">
+                <h3 class="entry-org">Team Story Tracker&nbsp;— Shared Translation Workspace</h3>
+                <span class="entry-when">Web App</span>
+              </div>
+              <p class="entry-role">JavaScript&nbsp;· Supabase (PostgreSQL + <span class="nw">RLS</span>, Realtime)&nbsp;· <span class="nw">GitHub Actions</span>&nbsp;· <span class="nw">GitHub Pages</span></p>
+              <ul class="entry-desc">
+                <li>Replaced a four-person webtoon team's single HTML file with a realtime workspace: owners, release days, daily status, drag-and-drop calendar, fair episode splits for new titles</li>
+                <li>Version-checked saves with field-level merge, staging site + tests, nightly off-site backups via GitHub Actions; used daily for 85 series at $0 hosting</li>
+              </ul>
             </div>
-            <p class="entry-role">JavaScript&nbsp;· Supabase (PostgreSQL + <span class="nw">RLS</span>, Realtime)&nbsp;· <span class="nw">GitHub Actions</span>&nbsp;· <span class="nw">GitHub Pages</span></p>
-            <ul class="entry-desc">
-              <li>Replaced a four-person webtoon team's single HTML file with a realtime workspace: owners, release days, daily status, drag-and-drop calendar, fair episode splits for new titles</li>
-              <li>Version-checked saves with field-level merge, staging site + tests, nightly off-site backups via GitHub Actions; used daily for 85 series at $0 hosting</li>
-            </ul>
           </div>
         </section>
 
@@ -140,35 +161,52 @@
             <p class="entry-role">Vocational Certificate (ปวช.)</p>
           </div>
         </section>
+
         <section>
           <h2 class="r-h2">Skills</h2>
+          <!-- Order per track: --ai / --dev -->
+          <div class="r-skills">
+            <div class="skill-row" style="--ai: 1; --dev: 3">
+              <p class="skill-name">AI &amp; AUTOMATION</p>
+              <p class="skill-list">
+                <span class="nw">Claude API</span><span class="sep">·</span><wbr>Advanced Prompt Engineering<span class="sep">·</span><wbr><span class="nw">AI App &amp; Agent Development</span><span class="sep">·</span><wbr><span class="nw">Power Automate</span><span class="sep">·</span><wbr><span class="nw">Microsoft 365 Copilot</span><span class="sep">·</span><wbr>Local LLM (Ollama, <span class="nw">LM Studio</span>)<span class="sep">·</span><wbr>AI Tools: Claude, <span class="nw">Claude Code</span>, Gemini
+              </p>
+            </div>
 
-          <div class="skill-row">
-            <p class="skill-name">AI &amp; AUTOMATION</p>
-            <p class="skill-list">
-              Advanced Prompt Engineering<span class="sep">·</span><wbr><span class="nw">AI App &amp; Agent Development</span> (Claude)<span class="sep">·</span><wbr><span class="nw">Microsoft 365 Copilot</span><span class="sep">·</span><wbr><span class="nw">Power Automate</span><span class="sep">·</span><wbr><span class="nw">AI Skills for All</span><span class="sep">·</span><wbr>AI Tools: Claude, <span class="nw">Claude Code</span>, Gemini, Ollama, <span class="nw">LM Studio</span>
-            </p>
-          </div>
+            <div class="skill-row" style="--ai: 2; --dev: 1">
+              <p class="skill-name">LANGUAGES</p>
+              <p class="skill-list">
+                Python<span class="sep">·</span><wbr>JavaScript<span class="sep">·</span><wbr>SQL (PostgreSQL, SQLite)<span class="sep">·</span><wbr>HTML / CSS<span class="sep">·</span><wbr>Java (<span class="nw">Android Studio</span>)
+              </p>
+            </div>
 
-          <div class="skill-row">
-            <p class="skill-name">CYBERSECURITY</p>
-            <p class="skill-list">
-              Penetration Testing<span class="sep">·</span><wbr>Cybersecurity Analysis<span class="sep">·</span><wbr>OT Security<span class="sep">·</span><wbr>ICS Security
-            </p>
-          </div>
+            <div class="skill-row" style="--ai: 3; --dev: 2">
+              <p class="skill-name">FRAMEWORKS &amp; TOOLS</p>
+              <p class="skill-list">
+                Flask<span class="sep">·</span><wbr>Playwright<span class="sep">·</span><wbr>Supabase (Realtime, <span class="nw">RLS</span>)<span class="sep">·</span><wbr>pytest<span class="sep">·</span><wbr>Git<span class="sep">·</span><wbr><span class="nw">GitHub Actions</span><span class="sep">·</span><wbr><span class="nw">GitHub Pages</span><span class="sep">·</span><wbr>Bootstrap
+              </p>
+            </div>
 
-          <div class="skill-row">
-            <p class="skill-name">TECHNICAL</p>
-            <p class="skill-list">
-              Java (<span class="nw">Android Studio</span>)<span class="sep">·</span><wbr>HTML<span class="sep">·</span><wbr>CSS<span class="sep">·</span><wbr>Bootstrap<span class="sep">·</span><wbr>Microsoft Excel (Advanced)<span class="sep">·</span><wbr><span class="nw">Power BI</span><span class="sep">·</span><wbr><span class="nw">E-Commerce</span> Development
-            </p>
-          </div>
+            <div class="skill-row" style="--ai: 5; --dev: 4">
+              <p class="skill-name">DATA</p>
+              <p class="skill-list">
+                Microsoft Excel (Advanced)<span class="sep">·</span><wbr><span class="nw">Power BI</span>
+              </p>
+            </div>
 
-          <div class="skill-row">
-            <p class="skill-name">SOFT SKILLS</p>
-            <p class="skill-list">
-              Task prioritisation<span class="sep">·</span><wbr>Cross-department coordination
-            </p>
+            <div class="skill-row" style="--ai: 4; --dev: 5">
+              <p class="skill-name">CYBERSECURITY</p>
+              <p class="skill-list">
+                Penetration Testing<span class="sep">·</span><wbr>Cybersecurity Analysis<span class="sep">·</span><wbr>OT / ICS Security
+              </p>
+            </div>
+
+            <div class="skill-row" style="--ai: 6; --dev: 6">
+              <p class="skill-name">SOFT SKILLS</p>
+              <p class="skill-list">
+                Task prioritisation<span class="sep">·</span><wbr>Cross-department coordination
+              </p>
+            </div>
           </div>
         </section>
 
@@ -177,8 +215,8 @@
 
     <footer class="r-foot">
       <div class="r-foot-info">
-        <span>Phupha Kongtin&nbsp;— <span class="nw">AI &amp; Automation</span></span>
-        <span>092-269-6035&nbsp;· phuphakongtin@gmail.com</span>
+        <span>Phupha Kongtin&nbsp;— <span class="nw" data-only="ai">AI &amp; Automation</span><span class="nw" data-only="dev">Software Developer</span></span>
+        <span>092-269-6035&nbsp;· phuphakongtin@gmail.com&nbsp;· github.com/PHUPHA-KT</span>
       </div>
       <figure class="r-qr">
         <img src="qr.svg" alt="QR code to online portfolio" width="88" height="88" />
