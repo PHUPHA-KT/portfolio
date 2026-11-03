@@ -54,8 +54,8 @@
 
     <p class="r-summary" data-only="ai">
       นักศึกษา IT ปีที่ 4 มุ่ง<span class="nw">สายงาน</span> <em><span class="nw">AI &amp; Automation</span></em>&nbsp;— สร้าง <span class="nw">AI app / agent</span>
-      และ<span class="nw">ระบบอัตโนมัติ</span>ที่<em>ลด<span class="nw">งานซ้ำซ้อน</span><span class="nw">ได้จริง</span></em> เช่น ระบบติดตามเรื่องใหม่จาก 6 แหล่ง
-      ที่แปลเรื่องย่อด้วย <span class="nw">Claude API</span> พร้อมพื้นฐานการพัฒนาเว็บ และ<span class="nw">ความมั่นคงปลอดภัยไซเบอร์</span>ระดับ<span class="nw">ผู้เชี่ยวชาญ</span>จาก <span class="nw">สกมช. (NCSA)</span>
+      และ<span class="nw">ระบบอัตโนมัติ</span>ที่<em>ลด<span class="nw">งานซ้ำซ้อน</span><span class="nw">ได้จริง</span></em> เช่น ระบบสร้างคลิปสั้นอัตโนมัติ
+      ที่ใช้จริงกับช่องยอดวิวรวม ~368K พร้อมพื้นฐานการพัฒนาเว็บ และ<span class="nw">ความมั่นคงปลอดภัยไซเบอร์</span>ระดับ<span class="nw">ผู้เชี่ยวชาญ</span>จาก <span class="nw">สกมช. (NCSA)</span>
     </p>
     <p class="r-summary" data-only="dev">
       นักศึกษา IT ปีที่ 4 มุ่ง<span class="nw">สายงาน</span> <em><span class="nw">Software Development</span></em>&nbsp;— สร้าง<em>เว็บแอปที่ทีมใช้งานจริงทุกวัน</em>
@@ -87,7 +87,19 @@
           <h2 class="r-h2">ผลงาน</h2>
           <!-- Order per track: --ai / --dev -->
           <div class="r-projects">
-            <div class="entry r-proj" style="--ai: 2; --dev: 4">
+            <div class="entry r-proj" style="--ai: 1; --dev: 2">
+              <div class="entry-top">
+                <h3 class="entry-org">TopicClip&nbsp;— <span class="nw">หัวข้อเดียว</span> → <span class="nw">คลิปสั้นภาษาไทยอัตโนมัติ</span></h3>
+                <span class="entry-when">AI Pipeline</span>
+              </div>
+              <p class="entry-role">Python&nbsp;· FastAPI&nbsp;· Claude&nbsp;· Playwright&nbsp;· ffmpeg&nbsp;· ElevenLabs&nbsp;· <span class="nw">YouTube Analytics API</span></p>
+              <ul class="entry-desc">
+                <li>ใส่หัวข้อเดียว → AI ค้นข้อมูล เขียนบท ทำ animation <span class="nw">ทีละ scene</span> พากย์ไทย ใส่ซับ/เพลง ได้คลิปพร้อมปก มี checkpoint ให้คนตรวจก่อนใช้เครดิต</li>
+                <li>ใช้จริงกับช่อง “รู้ยัง by Not”: 81 คลิป ~368K วิว YouTube ครบ 1,000 ผู้ติดตาม&nbsp;· dashboard วิเคราะห์ผลป้อนกลับให้ AI&nbsp;· ~9.3K บรรทัด 112 tests</li>
+              </ul>
+            </div>
+
+            <div class="entry r-proj" style="--ai: 4; --dev: 5" data-only="ai">
               <div class="entry-top">
                 <h3 class="entry-org"><span class="nw">ระบบอัตโนมัติ</span>จัดการ Workflow <span class="nw">งานแปลมังงะ</span></h3>
                 <span class="entry-when">Automation</span>
@@ -99,7 +111,7 @@
               </ul>
             </div>
 
-            <div class="entry r-proj" style="--ai: 1; --dev: 2">
+            <div class="entry r-proj" style="--ai: 2; --dev: 3">
               <div class="entry-top">
                 <h3 class="entry-org">Manhwa Radar&nbsp;— <span class="nw">ระบบเฝ้าติดตาม</span><span class="nw">งานใหม่อัตโนมัติ</span></h3>
                 <span class="entry-when">Automation</span>
@@ -112,7 +124,7 @@
               </ul>
             </div>
 
-            <div class="entry r-proj" style="--ai: 4; --dev: 3">
+            <div class="entry r-proj" style="--ai: 5; --dev: 4" data-only="dev">
               <div class="entry-top">
                 <h3 class="entry-org">FinQuest&nbsp;— <span class="nw">แอปการเงินส่วนตัวแบบเกม</span></h3>
                 <span class="entry-when">Mobile App</span>
@@ -168,7 +180,7 @@
             <div class="skill-row" style="--ai: 1; --dev: 3">
               <p class="skill-name">AI &amp; AUTOMATION</p>
               <p class="skill-list">
-                <span class="nw">Claude API</span><span class="sep">·</span><wbr>Advanced Prompt Engineering<span class="sep">·</span><wbr><span class="nw">AI App &amp; Agent Development</span><span class="sep">·</span><wbr><span class="nw">Power Automate</span><span class="sep">·</span><wbr><span class="nw">Microsoft 365 Copilot</span><span class="sep">·</span><wbr>Local LLM (Ollama, <span class="nw">LM Studio</span>)<span class="sep">·</span><wbr>AI Tools: Claude, <span class="nw">Claude Code</span>, Gemini
+                <span class="nw">Claude API</span><span class="sep">·</span><wbr>Advanced Prompt Engineering<span class="sep">·</span><wbr><span class="nw">AI App &amp; Agent Development</span><span class="sep">·</span><wbr><span class="nw">Power Automate</span><span class="sep">·</span><wbr><span class="nw">Microsoft 365 Copilot</span><span class="sep">·</span><wbr>ElevenLabs TTS<span class="sep">·</span><wbr>Local LLM (Ollama, <span class="nw">LM Studio</span>)<span class="sep">·</span><wbr>AI Tools: Claude, <span class="nw">Claude Code</span>, Gemini
               </p>
             </div>
 
@@ -182,7 +194,7 @@
             <div class="skill-row" style="--ai: 3; --dev: 2">
               <p class="skill-name">FRAMEWORKS &amp; TOOLS</p>
               <p class="skill-list">
-                Flask<span class="sep">·</span><wbr>Playwright<span class="sep">·</span><wbr>Supabase (Realtime, <span class="nw">RLS</span>)<span class="sep">·</span><wbr>pytest<span class="sep">·</span><wbr>Git<span class="sep">·</span><wbr><span class="nw">GitHub Actions</span><span class="sep">·</span><wbr><span class="nw">GitHub Pages</span><span class="sep">·</span><wbr>Bootstrap
+                FastAPI<span class="sep">·</span><wbr>Flask<span class="sep">·</span><wbr>Playwright<span class="sep">·</span><wbr>Supabase (Realtime, <span class="nw">RLS</span>)<span class="sep">·</span><wbr>pytest / unittest<span class="sep">·</span><wbr>ffmpeg<span class="sep">·</span><wbr>Git<span class="sep">·</span><wbr><span class="nw">GitHub Actions</span><span class="sep">·</span><wbr><span class="nw">GitHub Pages</span><span class="sep">·</span><wbr>Bootstrap
               </p>
             </div>
 

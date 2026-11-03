@@ -57,7 +57,9 @@ export class Labels {
       }
       const L = layouts[item.formation];
       const p = item.pos(time);
-      this.v.set(p[0] * L.w + L.x, p[1] * L.w + L.y, p[2] * L.w + L.z).project(camera);
+      const s = Math.abs(L.w);
+      this.v.set(p[0] * L.w + L.x, p[1] * s + L.y, p[2] * s + L.z).project(camera);
+      item.el.classList.toggle('is-mirrored', L.w < 0);
       if (this.v.z > 1) continue;
       const x = (this.v.x * 0.5 + 0.5) * width;
       const y = (-this.v.y * 0.5 + 0.5) * height;

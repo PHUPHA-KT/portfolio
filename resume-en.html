@@ -54,8 +54,8 @@
 
     <p class="r-summary" data-only="ai">
       Final-year IT student targeting <em><span class="nw">AI &amp; Automation</span></em> roles&nbsp;— builds <span class="nw">AI apps / agents</span>
-      and automation pipelines that <em>cut repetitive work</em>, such as a six-source release tracker that translates
-      synopses with the <span class="nw">Claude API</span>. Solid web development foundation and <span class="nw">expert-level</span>
+      and automation pipelines that <em>cut repetitive work</em>, such as a topic-to-video pipeline that runs
+      a real channel (~368K views). Solid web development foundation and <span class="nw">expert-level</span>
       cybersecurity training <span class="nw">from NCSA.</span>
     </p>
     <p class="r-summary" data-only="dev">
@@ -88,7 +88,19 @@
           <h2 class="r-h2">Projects</h2>
           <!-- Order per track: --ai / --dev -->
           <div class="r-projects">
-            <div class="entry r-proj" style="--ai: 2; --dev: 4">
+            <div class="entry r-proj" style="--ai: 1; --dev: 2">
+              <div class="entry-top">
+                <h3 class="entry-org">TopicClip&nbsp;— Topic-to-Short-Video AI Pipeline</h3>
+                <span class="entry-when">AI Pipeline</span>
+              </div>
+              <p class="entry-role">Python&nbsp;· FastAPI&nbsp;· Claude&nbsp;· Playwright&nbsp;· ffmpeg&nbsp;· ElevenLabs&nbsp;· <span class="nw">YouTube API</span></p>
+              <ul class="entry-desc">
+                <li>One topic → AI research, script, per-scene animation, Thai voice, subtitles, music → finished clip, with human checkpoints</li>
+                <li>Runs a real channel: 81 clips, ~368K views, 1,000 YouTube subscribers; analytics feed topic choice; ~9.3K lines, 112 tests</li>
+              </ul>
+            </div>
+
+            <div class="entry r-proj" style="--ai: 4; --dev: 5" data-only="ai">
               <div class="entry-top">
                 <h3 class="entry-org">Manga Localization Automation Pipeline</h3>
                 <span class="entry-when">Automation</span>
@@ -100,7 +112,7 @@
               </ul>
             </div>
 
-            <div class="entry r-proj" style="--ai: 1; --dev: 2">
+            <div class="entry r-proj" style="--ai: 2; --dev: 3">
               <div class="entry-top">
                 <h3 class="entry-org">Manhwa Radar&nbsp;— Automated Release Tracker</h3>
                 <span class="entry-when">Automation</span>
@@ -108,12 +120,12 @@
               <p class="entry-role">Python&nbsp;· Playwright&nbsp;· Flask&nbsp;· SQLite&nbsp;· pytest&nbsp;· <span class="nw">Claude API</span></p>
               <ul class="entry-desc">
                 <li>Scheduled scraping of six sources, <span class="nw">fuzzy-matched</span> dedupe into SQLite, daily digests and a web dashboard</li>
-                <li data-only="ai">Automatic Thai translation of synopses via the <span class="nw">Claude API</span>&nbsp;· 22 modules, 6,488 lines, 18 test files</li>
-                <li data-only="dev">22 modules, 6,488 lines, covered by 18 pytest files; synopses translated to Thai via the <span class="nw">Claude API</span></li>
+                <li data-only="ai">Thai synopses via the <span class="nw">Claude API</span>&nbsp;· 22 modules, 6,488 lines, 18 test files</li>
+                <li data-only="dev">22 modules, 6,488 lines, 18 pytest files; Thai synopses via the <span class="nw">Claude API</span></li>
               </ul>
             </div>
 
-            <div class="entry r-proj" style="--ai: 4; --dev: 3">
+            <div class="entry r-proj" style="--ai: 5; --dev: 4" data-only="dev">
               <div class="entry-top">
                 <h3 class="entry-org">FinQuest&nbsp;— Gamified Personal Finance App</h3>
                 <span class="entry-when">Mobile App</span>
@@ -132,8 +144,8 @@
               </div>
               <p class="entry-role">JavaScript&nbsp;· Supabase (PostgreSQL + <span class="nw">RLS</span>, Realtime)&nbsp;· <span class="nw">GitHub Actions</span>&nbsp;· <span class="nw">GitHub Pages</span></p>
               <ul class="entry-desc">
-                <li>Replaced a four-person webtoon team's single HTML file with a realtime workspace: owners, release days, daily status, drag-and-drop calendar, fair episode splits for new titles</li>
-                <li>Version-checked saves with field-level merge, staging site + tests, nightly off-site backups via GitHub Actions; used daily for 85 series at $0 hosting</li>
+                <li>Replaced a 4-person team's single HTML file with a realtime workspace: owners, release days, daily status, drag-and-drop calendar, fair episode splits</li>
+                <li>Version-checked saves + field-level merge, staging + tests, nightly backups via GitHub Actions; 85 series daily at $0 hosting</li>
               </ul>
             </div>
           </div>
@@ -169,7 +181,7 @@
             <div class="skill-row" style="--ai: 1; --dev: 3">
               <p class="skill-name">AI &amp; AUTOMATION</p>
               <p class="skill-list">
-                <span class="nw">Claude API</span><span class="sep">·</span><wbr>Advanced Prompt Engineering<span class="sep">·</span><wbr><span class="nw">AI App &amp; Agent Development</span><span class="sep">·</span><wbr><span class="nw">Power Automate</span><span class="sep">·</span><wbr><span class="nw">Microsoft 365 Copilot</span><span class="sep">·</span><wbr>Local LLM (Ollama, <span class="nw">LM Studio</span>)<span class="sep">·</span><wbr>AI Tools: Claude, <span class="nw">Claude Code</span>, Gemini
+                <span class="nw">Claude API</span><span class="sep">·</span><wbr>Advanced Prompt Engineering<span class="sep">·</span><wbr><span class="nw">AI App &amp; Agent Development</span><span class="sep">·</span><wbr><span class="nw">Power Automate</span><span class="sep">·</span><wbr><span class="nw">Microsoft 365 Copilot</span><span class="sep">·</span><wbr>ElevenLabs TTS<span class="sep">·</span><wbr>Local LLM (Ollama, <span class="nw">LM Studio</span>)<span class="sep">·</span><wbr>AI Tools: Claude, <span class="nw">Claude Code</span>, Gemini
               </p>
             </div>
 
@@ -183,7 +195,7 @@
             <div class="skill-row" style="--ai: 3; --dev: 2">
               <p class="skill-name">FRAMEWORKS &amp; TOOLS</p>
               <p class="skill-list">
-                Flask<span class="sep">·</span><wbr>Playwright<span class="sep">·</span><wbr>Supabase (Realtime, <span class="nw">RLS</span>)<span class="sep">·</span><wbr>pytest<span class="sep">·</span><wbr>Git<span class="sep">·</span><wbr><span class="nw">GitHub Actions</span><span class="sep">·</span><wbr><span class="nw">GitHub Pages</span><span class="sep">·</span><wbr>Bootstrap
+                FastAPI<span class="sep">·</span><wbr>Flask<span class="sep">·</span><wbr>Playwright<span class="sep">·</span><wbr>Supabase (Realtime, <span class="nw">RLS</span>)<span class="sep">·</span><wbr>pytest / unittest<span class="sep">·</span><wbr>ffmpeg<span class="sep">·</span><wbr>Git<span class="sep">·</span><wbr><span class="nw">GitHub Actions</span><span class="sep">·</span><wbr><span class="nw">GitHub Pages</span><span class="sep">·</span><wbr>Bootstrap
               </p>
             </div>
 

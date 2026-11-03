@@ -4,8 +4,8 @@ import { Stage } from './core/Stage.js';
 import { ParticleSim } from './sim/ParticleSim.js';
 import { Labels } from './ui/Labels.js';
 import {
-  FORMATION_COUNT, HERO, HEX, TRACKER, RADAR, FINQUEST, MANGA, EXPERIENCE, CERTS, CONTACT, SIM_SIZES, STARS, RADAR_SOURCES, RADAR_CORE,
-  TIMELINE_NODE, SKILL_RADII, BUDGET_SPLIT, skillCenter, budgetArcAnchor, teammate, TRACKER_CORE, TRACKER_VAULT, computeLayouts, loaderLayout,
+  FORMATION_COUNT, HERO, HEX, TOPICCLIP, TRACKER, RADAR, FINQUEST, MANGA, EXPERIENCE, CERTS, CONTACT, SIM_SIZES, STARS, RADAR_SOURCES, RADAR_CORE,
+  TIMELINE_NODE, SKILL_RADII, BUDGET_SPLIT, skillCenter, budgetArcAnchor, clipLoop, CLIP_STATIONS, teammate, TRACKER_CORE, TRACKER_VAULT, computeLayouts, loaderLayout,
 } from './sim/formations.js';
 
 const nextFrame = () => new Promise((r) => requestAnimationFrame(() => r()));
@@ -122,6 +122,16 @@ export class Experience {
       { formation: TRACKER, text: 'Nightly backup', pos: () => [TRACKER_VAULT[0], TRACKER_VAULT[1] - 0.55, 0] },
       { formation: TRACKER, text: '4 teammates', pos: (t) => { const m = teammate(1, t); return [m[0], m[1] + 0.8, m[2]]; } },
     ];
+    CLIP_STATIONS.forEach((text, k) => {
+      const anchor = () => {
+        if (k === 3) return [4.2, 1.75, 0]; // above the clip frame
+        // Labels hang above their anchor: lift it for upper stations, drop it below lower ones.
+        const p = clipLoop(k / 6);
+        const dy = k === 4 || k === 5 ? -0.7 : 0.6;
+        return [p[0], p[1] + dy, 0];
+      };
+      items.push({ formation: TOPICCLIP, text, cls: k === 3 || k === 5 ? 'label--major' : '', pos: anchor });
+    });
     BUDGET_SPLIT.forEach(({ label }, i) => {
       items.push({ formation: FINQUEST, text: label, cls: i === 2 ? 'label--major' : '', pos: (t) => budgetArcAnchor(i, t) });
     });

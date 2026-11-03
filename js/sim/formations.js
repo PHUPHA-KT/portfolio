@@ -6,24 +6,26 @@
  *   0 hero        free drift
  *   1 about       hexagon brand mark
  *   2 skills      three orbiting bodies, mass = weight
- *   3 tracker     four teammates synced through a realtime core + backup vault
- *   4 radar       six sources converging into one core
- *   5 finquest    50/30/20 doughnut + XP bar
- *   6 manga       one stream tightening through stations
- *   7 experience  timeline filament with one node
- *   8 certs       three constellations (14 stars)
- *   9 contact     singularity / accretion disk
+ *   3 topicclip   production loop: topic → … → clip frame → analytics → topic
+ *   4 tracker     four teammates synced through a realtime core + backup vault
+ *   5 radar       six sources converging into one core
+ *   6 finquest    50/30/20 doughnut + XP bar
+ *   7 manga       one stream tightening through stations
+ *   8 experience  timeline filament with one node
+ *   9 certs       three constellations (14 stars)
+ *  10 contact     singularity / accretion disk
  */
-export const FORMATION_COUNT = 10;
+export const FORMATION_COUNT = 11;
 export const HERO = 0;
 export const HEX = 1;
-export const TRACKER = 3;
-export const RADAR = 4;
-export const FINQUEST = 5;
-export const MANGA = 6;
-export const EXPERIENCE = 7;
-export const CERTS = 8;
-export const CONTACT = 9;
+export const TOPICCLIP = 3;
+export const TRACKER = 4;
+export const RADAR = 5;
+export const FINQUEST = 6;
+export const MANGA = 7;
+export const EXPERIENCE = 8;
+export const CERTS = 9;
+export const CONTACT = 10;
 
 /** Particle grid edge per device tier → 16k / 36k / 65k particles. */
 export const SIM_SIZES = [128, 192, 256];
@@ -68,6 +70,13 @@ export function budgetArcAnchor(i, t, r = 3.8) {
   return [Math.cos(a) * r, Math.cos(-0.25) * y, Math.sin(-0.25) * y];
 }
 
+/** Mirrors clipLoop() in GLSL. Stations sit at k/6 around the loop. */
+export function clipLoop(u) {
+  const a = Math.PI - u * Math.PI * 2;
+  return [Math.cos(a) * 4.2, Math.sin(a) * 2.5, 0];
+}
+export const CLIP_STATIONS = ['Topic', 'Web research', 'Script', 'Animation · Voice', 'Publish', 'Analytics'];
+
 /** Mirrors teammate() in GLSL. */
 export function teammate(i, t) {
   const a = Math.PI * 0.25 + i * Math.PI * 0.5 + t * 0.05;
@@ -81,6 +90,7 @@ export const CAMERA_PRESETS = [
   { pos: [0, 0, 14], look: [0, 0, 0] },
   { pos: [0.8, 0.4, 13.2], look: [0.5, 0, 0] },
   { pos: [-0.9, 1.3, 13.6], look: [-0.3, 0, 0] },
+  { pos: [0.6, 0.3, 14.2], look: [0.2, 0, 0] },
   { pos: [-0.5, 0.5, 13.8], look: [-0.2, 0, 0] },
   { pos: [-0.4, 0.3, 14.2], look: [0, 0, 0] },
   { pos: [0.4, -0.6, 13.6], look: [0.2, -0.2, 0] },
@@ -111,7 +121,13 @@ export function computeLayouts(aspect, fovDeg, sides, dist = 14) {
     const s = Math.min(1.05, (visW * 0.4) / 11);
     // Keep ~1.9 units free at the screen edge for the source labels.
     const x = Math.min(visW * 0.25, visW / 2 - 5 * s - 1.9);
-    return { x: dir * x, y: 0, z: 0, s };
+    // Radar's source labels sit on its left edge; mirror it when it is on the right
+    // so those labels face the screen edge instead of the text column.
+    // Extra room on that side keeps the labels clear of the section rail.
+    const mirror = i === RADAR && dir === 1 ? -1 : 1;
+    const sm = mirror < 0 ? s * 0.88 : s;
+    const xm = mirror < 0 ? Math.min(x, visW / 2 - 5 * sm - 3.1) : x;
+    return { x: dir * xm, y: 0, z: 0, s: sm * mirror };
   });
 }
 

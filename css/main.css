@@ -124,6 +124,9 @@ button { font: inherit; color: inherit; }
 .label > span { display: block; transform: translate(-50%, -100%); }
 .label--left > span { transform: translate(calc(-100% - 14px), -50%); }
 .label--right > span { transform: translate(14px, -50%); }
+/* Mirrored formations swap which side edge labels hang from. */
+.label--left.is-mirrored > span { transform: translate(14px, -50%); }
+.label--right.is-mirrored > span { transform: translate(calc(-100% - 14px), -50%); }
 .label--major { color: var(--fg); font-size: 12px; }
 .label--major > span::before {
   content: '';
@@ -769,6 +772,8 @@ main { position: relative; z-index: 3; }
   cursor: pointer;
 }
 .video { aspect-ratio: 16 / 9; }
+.video--vertical { aspect-ratio: 9 / 16; width: min(100%, 300px); }
+.video-caption { margin: 10px 0 0; font-size: 13px; color: var(--faint); }
 .video img, .shot img {
   width: 100%;
   height: 100%;

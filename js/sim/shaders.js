@@ -8,7 +8,7 @@ export const FORMATIONS_GLSL = /* glsl */ `
 struct Target { vec3 p; float k; float glow; float a; float local; };
 
 uniform float uTime;
-uniform vec4 uLayout[10];   // xyz offset, w scale
+uniform vec4 uLayout[11];   // xyz offset, w scale
 uniform vec3 uStars[14];
 uniform float uHoverStar;
 uniform float uHeroSpread;   // horizontal spread of the free drift, follows aspect
@@ -103,7 +103,7 @@ Target fSkills(vec4 s, vec4 q) {
   return Target(p, 2.2, i < 0.5 ? 0.1 : 0.18, i < 0.5 ? 1.0 : 0.8, 1.0);
 }
 
-// 6 — manga pipeline: a chaotic stream that tightens through three stations.
+// 7 — manga pipeline: a chaotic stream that tightens through three stations.
 Target fManga(vec4 s, vec4 q) {
   if (q.x < 0.1) return ambient(s, q);
   float t = uTime;
@@ -127,7 +127,7 @@ Target fManga(vec4 s, vec4 q) {
   return Target(p, 2.4, st * 0.55, fadeEnds(u), 1.0);
 }
 
-// 4 — Manhwa Radar: six source lanes converge into one core, one stream leaves.
+// 5 — Manhwa Radar: six source lanes converge into one core, one stream leaves.
 Target fRadar(vec4 s, vec4 q) {
   if (q.x < 0.1) return ambient(s, q);
   float t = uTime;
@@ -160,7 +160,7 @@ Target fRadar(vec4 s, vec4 q) {
   return Target(p, 2.4, glow, fadeEnds(u), 1.0);
 }
 
-// 5 — FinQuest: the app's 50/30/20 doughnut, and an XP bar that levels up.
+// 6 — FinQuest: the app's 50/30/20 doughnut, and an XP bar that levels up.
 Target fFinQuest(vec4 s, vec4 q) {
   if (q.x < 0.1) return ambient(s, q);
   float t = uTime;
@@ -183,7 +183,46 @@ Target fFinQuest(vec4 s, vec4 q) {
   return Target(p, 2.4, on ? 0.85 : 0.0, on ? 1.0 : 0.35, 1.0);
 }
 
-// 3 — Team Story Tracker: four teammates kept in sync through one realtime
+// 3 — TopicClip: a production loop. Topic → research → script → animation &
+// voice (a 9:16 clip frame) → publish → analytics, which feeds the next topic.
+vec2 clipLoop(float u) {
+  float a = PI - u * TAU;            // clockwise from the left
+  return vec2(cos(a) * 4.2, sin(a) * 2.5);
+}
+
+Target fTopicClip(vec4 s, vec4 q) {
+  if (q.x < 0.1) return ambient(s, q);
+  float t = uTime;
+  if (q.y < 0.15) {
+    // Station nodes (station 3 is drawn as the clip frame instead)
+    float k = floor(s.x * 5.0);
+    k += step(2.5, k);
+    vec2 c = clipLoop(k / 6.0);
+    return Target(vec3(c, 0.0) + randDir(s.y, s.z) * 0.32 * pow(s.w, 0.6), 2.6, 0.45, 1.0, 1.0);
+  }
+  if (q.y < 0.32) {
+    // Vertical 9:16 clip frame at the render station, with a playhead sweeping down
+    vec2 c = clipLoop(0.5);
+    vec2 hs = vec2(0.62, 1.1);
+    vec2 e;
+    if (s.w < 0.75) {
+      e = s.z < 0.5
+        ? vec2((s.y * 2.0 - 1.0) * hs.x, s.x < 0.5 ? -hs.y : hs.y)
+        : vec2(s.x < 0.5 ? -hs.x : hs.x, (s.y * 2.0 - 1.0) * hs.y);
+    } else {
+      float play = 1.0 - fract(t * 0.25) * 2.0;
+      e = vec2((s.y * 2.0 - 1.0) * hs.x * 0.85, play * hs.y * 0.9);
+    }
+    return Target(vec3(c + e, (q.z - 0.5) * 0.1), 2.8, s.w < 0.75 ? 0.5 : 0.9, 1.0, 1.0);
+  }
+  // The loop itself; the analytics → topic return arc glows, it is the feedback.
+  float u = fract(s.y + t * 0.05);
+  vec3 p = vec3(clipLoop(u), 0.0) + randDir(s.z, s.w) * (0.05 + 0.06 * q.z);
+  float feedback = smoothstep(0.8, 0.9, u);
+  return Target(p, 2.3, 0.12 + feedback * 0.55, 1.0, 1.0);
+}
+
+// 4 — Team Story Tracker: four teammates kept in sync through one realtime
 // core, which drops a backup packet into an off-site vault.
 vec3 teammate(float i, float t) {
   float a = PI * 0.25 + i * PI * 0.5 + t * 0.05;
@@ -225,7 +264,7 @@ Target fTracker(vec4 s, vec4 q) {
   return Target(vault + vec3(e, (q.z - 0.5) * 0.15), 2.8, 0.35, 1.0, 1.0);
 }
 
-// 7 — experience: a timeline filament with one bright node (MEA).
+// 8 — experience: a timeline filament with one bright node (MEA).
 Target fTimeline(vec4 s, vec4 q) {
   if (q.x < 0.12) return ambient(s, q);
   float t = uTime;
@@ -244,7 +283,7 @@ Target fTimeline(vec4 s, vec4 q) {
   return Target(p, 2.2, 0.0, fadeEnds(u), 1.0);
 }
 
-// 8 — certifications: 14 stars + constellation lines (NCSA closes into a shield).
+// 9 — certifications: 14 stars + constellation lines (NCSA closes into a shield).
 Target fCerts(vec4 s, vec4 q) {
   if (q.x < 0.1) return ambient(s, q);
   if (q.y < 0.58) {
@@ -262,7 +301,7 @@ Target fCerts(vec4 s, vec4 q) {
   return Target(p, 2.4, 0.0, 0.55, 1.0);
 }
 
-// 9 — contact: everything falls into a singularity (accretion disk + photon ring).
+// 10 — contact: everything falls into a singularity (accretion disk + photon ring).
 Target fSingularity(vec4 s, vec4 q) {
   if (q.x < 0.06) return ambient(s, q);
   float t = uTime;
@@ -283,12 +322,13 @@ Target formation(float id, vec4 s, vec4 q) {
   if (id < 0.5) return fHero(s, q);
   if (id < 1.5) return fHex(s, q);
   if (id < 2.5) return fSkills(s, q);
-  if (id < 3.5) return fTracker(s, q);
-  if (id < 4.5) return fRadar(s, q);
-  if (id < 5.5) return fFinQuest(s, q);
-  if (id < 6.5) return fManga(s, q);
-  if (id < 7.5) return fTimeline(s, q);
-  if (id < 8.5) return fCerts(s, q);
+  if (id < 3.5) return fTopicClip(s, q);
+  if (id < 4.5) return fTracker(s, q);
+  if (id < 5.5) return fRadar(s, q);
+  if (id < 6.5) return fFinQuest(s, q);
+  if (id < 7.5) return fManga(s, q);
+  if (id < 8.5) return fTimeline(s, q);
+  if (id < 9.5) return fCerts(s, q);
   return fSingularity(s, q);
 }
 
@@ -296,7 +336,8 @@ Target placed(float id, vec4 s, vec4 q) {
   Target t = formation(id, s, q);
   if (t.local > 0.5) {
     vec4 L = uLayout[int(id + 0.5)];
-    t.p = t.p * L.w + L.xyz;
+    // Negative scale mirrors the formation horizontally (x only).
+    t.p = vec3(t.p.x * L.w, t.p.yz * abs(L.w)) + L.xyz;
   }
   return t;
 }

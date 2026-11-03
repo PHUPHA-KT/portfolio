@@ -112,8 +112,8 @@
       </div>
 
       <dl class="hero-stats intro" style="--i:5">
-        <div><dt>ผลงาน</dt><dd><span data-count="4">4</span></dd></div>
-        <div><dt><span class="nw">เรื่องที่ทีมติดตามทุกวัน</span></dt><dd><span data-count="85">85</span></dd></div>
+        <div><dt>ผลงาน</dt><dd><span data-count="5">5</span></dd></div>
+        <div><dt><span class="nw">วิวจากคลิปที่ระบบ AI สร้าง</span></dt><dd><span data-count="368">368</span>K</dd></div>
         <div><dt>ประกาศนียบัตร</dt><dd><span data-count="14">14</span>+</dd></div>
       </dl>
 
@@ -181,6 +181,7 @@
             <li>AI App &amp; Agent Development</li>
             <li><span class="nw">Power Automate</span></li>
             <li><span class="nw">Microsoft 365 Copilot</span></li>
+            <li>ElevenLabs TTS</li>
             <li>Local LLM (Ollama, <span class="nw">LM Studio</span>)</li>
           </ul>
           <p class="skill-tools"><span>เครื่องมือ &amp; โมเดล</span> Claude&nbsp;· <span class="nw">Claude Code&nbsp;·</span> Google Antigravity&nbsp;· Gemini&nbsp;· OpenClaw</p>
@@ -195,7 +196,7 @@
             <li>HTML / CSS</li>
             <li>Java (<span class="nw">Android Studio</span>)</li>
           </ul>
-          <p class="skill-tools"><span>Frameworks &amp; Tools</span> Flask&nbsp;· Playwright&nbsp;· Supabase (Realtime, RLS)&nbsp;· pytest&nbsp;· Git&nbsp;· <span class="nw">GitHub Actions&nbsp;·</span> <span class="nw">GitHub Pages&nbsp;·</span> Bootstrap</p>
+          <p class="skill-tools"><span>Frameworks &amp; Tools</span> FastAPI&nbsp;· Flask&nbsp;· Playwright&nbsp;· Supabase (Realtime, RLS)&nbsp;· pytest / unittest&nbsp;· ffmpeg&nbsp;· Git&nbsp;· <span class="nw">GitHub Actions&nbsp;·</span> <span class="nw">GitHub Pages&nbsp;·</span> Bootstrap</p>
         </div>
 
         <div class="skill-group reveal">
@@ -228,12 +229,51 @@
     <!-- ===================== 03 PROJECTS ===================== -->
     <section id="projects" aria-labelledby="projects-title">
 
-      <article class="section" id="story-tracker" data-formation="3" data-side="left" data-name="ผลงาน" data-index="03">
+      <article class="section" id="topicclip" data-formation="3" data-side="left" data-name="ผลงาน" data-index="03">
         <div class="section-inner">
           <header class="section-head reveal">
             <span class="section-index">03</span>
             <h2 id="projects-title">ผลงาน</h2>
           </header>
+
+          <p class="project-tag reveal">AI Pipeline&nbsp;· Content Automation</p>
+          <h3 class="project-title reveal">TopicClip&nbsp;— <span class="nw">หัวข้อเดียว</span> → <span class="nw">คลิปสั้นภาษาไทย</span></h3>
+          <p class="project-sub reveal">ใช้จริงกับช่อง “รู้ยัง by Not” บน YouTube และ TikTok</p>
+          <p class="body reveal">
+            พิมพ์หัวข้อ 1 บรรทัด → AI ค้นข้อมูลจากเว็บพร้อมแหล่งอ้างอิง → เขียนบท → Claude เขียน animation (HTML/JS)
+            <span class="nw">ทีละ scene</span> → พากย์ไทยด้วย ElevenLabs → ใส่เพลง SFX และซับ ได้คลิปพร้อมปกที่ AI วาดและข้อความโพสต์
+            มี checkpoint ให้คนตรวจบทและภาพก่อนใช้เครดิต รองรับคลิปความรู้ เล่าเรื่อง ซีรีส์หลายเสียง
+            (ตัวละครแต่ละตัวมีเสียงของตัวเอง) และซีรีส์ Shorts หลาย EP ทั้งแนวตั้ง 9:16 และแนวนอน 16:9
+          </p>
+          <p class="body reveal">
+            Web dashboard (FastAPI) สร้างคลิป ต่อคิวหลายหัวข้อ เก็บคลังคลิปแยกตามซีรีส์ และวิเคราะห์ผลจาก
+            <span class="nw">YouTube Analytics</span> + TikTok (% ดูจนจบ, hook 10 วินาทีแรก, ผู้ติดตามต่อพันวิว)
+            แล้วป้อนผลจริงกลับให้ AI ใช้คิด<span class="nw">หัวข้อถัดไป</span>
+          </p>
+          <dl class="metrics reveal">
+            <div><dd>81</dd><dt>คลิปที่ระบบสร้าง</dt></div>
+            <div><dd>~368K</dd><dt>วิวรวม YouTube + TikTok</dt></div>
+            <div><dd>1,000</dd><dt>ผู้ติดตาม YouTube</dt></div>
+          </dl>
+          <p class="project-sub reveal">~9.3K บรรทัด&nbsp;· 28 โมดูล&nbsp;· 112 tests&nbsp;· 96 commits</p>
+          <ul class="tags reveal">
+            <li>Python</li><li>FastAPI</li><li>Claude</li><li>Playwright</li><li>ffmpeg</li><li>ElevenLabs</li><li><span class="nw">YouTube Analytics API</span></li><li>pythainlp</li><li>Ollama</li>
+          </ul>
+          <p class="project-links reveal">
+            <a class="btn" href="https://www.youtube.com/@%E0%B8%A3%E0%B8%B9%E0%B9%89%E0%B8%A2%E0%B8%B1%E0%B8%87ByNot" target="_blank" rel="noopener">YouTube</a>
+            <a class="btn" href="https://www.tiktok.com/@rooyangbynot" target="_blank" rel="noopener">TikTok</a>
+          </p>
+          <div class="video video--vertical reveal">
+            <video controls preload="none" playsinline poster="projects/topicclip-poster.jpg" aria-label="ตัวอย่างคลิปที่ TopicClip สร้าง: ทหาร 800 นายปะทะทัพหลายหมื่น">
+              <source src="projects/topicclip-sample.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <p class="video-caption reveal">ตัวอย่างคลิปจากระบบ: ทหารราบสมัยใหม่ 1 กองพันย้อนยุคเซ็นโงกุ (41K วิวบน TikTok)</p>
+        </div>
+      </article>
+
+      <article class="section" id="story-tracker" data-formation="4" data-side="right" data-name="ผลงาน" data-index="03">
+        <div class="section-inner">
           <p class="project-tag reveal">Web App · Realtime · Supabase</p>
           <h3 class="project-title reveal">Team Story Tracker&nbsp;— <span class="nw">พื้นที่ทำงานร่วม</span><span class="nw">ของทีมแปลเว็บตูน</span></h3>
           <p class="project-sub reveal">Shared workspace for a four-person webtoon translation team</p>
@@ -268,7 +308,7 @@
         </div>
       </article>
 
-      <article class="section" id="radar" data-formation="4" data-side="right" data-name="ผลงาน" data-index="03">
+      <article class="section" id="radar" data-formation="5" data-side="left" data-name="ผลงาน" data-index="03">
         <div class="section-inner">
           <p class="project-tag reveal">Automation&nbsp;· Data Pipeline</p>
           <h3 class="project-title reveal">Manhwa Radar&nbsp;— <span class="nw">ระบบเฝ้าติดตาม</span><span class="nw">มังฮวาใหม่อัตโนมัติ</span></h3>
@@ -293,7 +333,7 @@
         </div>
       </article>
 
-      <article class="section" id="finquest" data-formation="5" data-side="left" data-name="ผลงาน" data-index="03">
+      <article class="section" id="finquest" data-formation="6" data-side="right" data-name="ผลงาน" data-index="03">
         <div class="section-inner">
           <p class="project-tag reveal">Mobile App · Team Project</p>
           <h3 class="project-title reveal">FinQuest — <span class="nw">แอปจัดการการเงิน</span><span class="nw">ส่วนตัวแบบเกม</span></h3>
@@ -313,7 +353,7 @@
         </div>
       </article>
 
-      <article class="section" id="manga" data-formation="6" data-side="right" data-name="ผลงาน" data-index="03">
+      <article class="section" id="manga" data-formation="7" data-side="left" data-name="ผลงาน" data-index="03">
         <div class="section-inner">
 
           <p class="project-tag reveal">Automation&nbsp;· AI</p>
@@ -334,7 +374,7 @@
     </section>
 
     <!-- ===================== 04 EXPERIENCE ===================== -->
-    <section class="section" id="experience" data-formation="7" data-side="left" data-name="ประสบการณ์" data-index="04">
+    <section class="section" id="experience" data-formation="8" data-side="right" data-name="ประสบการณ์" data-index="04">
       <div class="section-inner">
         <header class="section-head reveal">
           <span class="section-index">04</span>
@@ -349,7 +389,7 @@
     </section>
 
     <!-- ===================== 05 CERTIFICATIONS ===================== -->
-    <section class="section section-certs" id="certs" data-formation="8" data-side="right" data-name="ประกาศนียบัตร" data-index="05">
+    <section class="section section-certs" id="certs" data-formation="9" data-side="left" data-name="ประกาศนียบัตร" data-index="05">
       <div class="section-inner">
         <header class="section-head reveal">
           <span class="section-index">05</span>
@@ -392,7 +432,7 @@
     </section>
 
     <!-- ===================== 06 CONTACT ===================== -->
-    <section class="section section-contact" id="contact" data-formation="9" data-side="center" data-name="ติดต่อ" data-index="06">
+    <section class="section section-contact" id="contact" data-formation="10" data-side="center" data-name="ติดต่อ" data-index="06">
       <div class="contact">
         <header class="section-head reveal">
           <span class="section-index">06</span>
