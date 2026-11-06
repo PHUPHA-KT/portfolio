@@ -3,7 +3,7 @@ import { GPUComputationRenderer } from 'three/addons/misc/GPUComputationRenderer
 import { FORMATIONS_GLSL, VELOCITY_GLSL, POSITION_GLSL, POINTS_VERT, POINTS_FRAG } from './shaders.js';
 
 const TIER_LOOK = [
-  { size: 3.2, alpha: 0.8 },
+  { size: 2.5, alpha: 0.6 },
   { size: 2.8, alpha: 0.6 },
   { size: 2.5, alpha: 0.5 },
 ];

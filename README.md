@@ -11,6 +11,16 @@ ES modules need a local server (opening `index.html` directly won't work):
 npx serve .
 ```
 
+## Before every deploy
+
+```bash
+node tools/bump-version.js
+```
+
+GitHub Pages caches files for 10 minutes. This stamps a new `?v=` on every JS
+module (via the import map), the stylesheet and the resume assets, so returning
+visitors never mix a fresh `index.html` with stale cached scripts.
+
 ## Deploy (GitHub Pages / Netlify)
 
 Upload the whole folder: `index.html`, `css/`, `js/`, `certs/`, `projects/`,

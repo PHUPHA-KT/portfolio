@@ -113,7 +113,8 @@ export function computeLayouts(aspect, fovDeg, sides, dist = 14) {
 
   return sides.map((side, i) => {
     if (i === HERO) return { x: 0, y: 0, z: 0, s: 1 };
-    if (i === CONTACT) return { x: 0, y: 0, z: 0, s: wide ? 1 : Math.min(0.85, visW / 10) };
+    // Narrow screens: sit below the stacked contact links instead of behind them.
+    if (i === CONTACT) return { x: 0, y: wide ? 0 : -visH * 0.2, z: 0, s: wide ? 1 : Math.min(0.85, visW / 10) };
     if (!wide || side === 'center') {
       return { x: 0, y: 0, z: 0, s: Math.min(0.9, visW / 11.5) };
     }

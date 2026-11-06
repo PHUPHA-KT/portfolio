@@ -342,6 +342,11 @@ button { font: inherit; color: inherit; }
 .nav-toggle { display: none; }
 
 @media (max-width: 860px) {
+  :root { --nav-h: 60px; }
+
+  /* Solid enough that page text scrolling underneath stays out of the way. */
+  .nav { background: rgba(10, 10, 15, 0.9); }
+
   .nav-toggle {
     display: flex;
     flex-direction: column;
@@ -349,19 +354,22 @@ button { font: inherit; color: inherit; }
     gap: 7px;
     width: 44px;
     height: 44px;
-    margin-right: -10px;
+    /* <nav> collapses to zero width here (its list is fixed), so push the button
+       to the edge explicitly instead of relying on space-between. */
+    margin: 0 -10px 0 auto;
     padding: 10px;
     background: none;
     border: 0;
   }
   .nav-toggle span {
     display: block;
-    height: 1px;
+    height: 2px;
+    border-radius: 1px;
     background: var(--fg);
     transition: transform 0.4s var(--ease-out);
   }
-  .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
-  .nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+  .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(4.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-4.5px) rotate(-45deg); }
 
   .nav-links {
     position: fixed;
@@ -369,7 +377,7 @@ button { font: inherit; color: inherit; }
     flex-direction: column;
     gap: 0;
     padding: 8px var(--gutter) 24px;
-    background: rgba(10, 10, 15, 0.96);
+    background: #0a0a0f;
     border-bottom: 1px solid var(--line);
     opacity: 0;
     visibility: hidden;
@@ -1004,13 +1012,38 @@ main { position: relative; z-index: 3; }
     margin: 0 auto;
     padding: 26px 20px;
     border-radius: 12px;
-    background: var(--bg-veil);
+    /* The text card sits right on top of the formation here, so it must read
+       clearly; the shape shows in the gaps between cards as you scroll. */
+    background: rgba(10, 10, 15, 0.9);
   }
-  .section-contact .contact { padding: 26px 16px; border-radius: 12px; background: rgba(10, 10, 15, 0.55); }
-  .label--left { display: none; }
-  .about-id { grid-template-columns: 72px 1fr; gap: 16px; }
-  .about-photo { width: 72px; }
+  .section-contact .contact { padding: 26px 16px; border-radius: 12px; background: rgba(10, 10, 15, 0.72); }
+  /* Scene labels are anchored for side-by-side layouts; here they would sit on the text. */
+  .labels { display: none; }
+  .video--vertical { margin-inline: auto; }
+  .video-caption { text-align: center; }
   .footer { flex-direction: column; }
+}
+
+@media (max-width: 520px) {
+  /* Photo above the lead: side by side squeezes Thai text into a very narrow column. */
+  .about-id { grid-template-columns: 1fr; gap: 14px; }
+  .about-photo { width: 84px; }
+
+  .section-head { margin-bottom: 20px; }
+  .metrics { gap: 18px; justify-content: space-between; }
+  .metrics div { flex: 1 1 0; min-width: 0; }
+  .metrics dd { font-size: 24px; }
+
+  /* Keep the hero copy legible over the particle field. */
+  .hero-shade {
+    width: 130vw;
+    height: 84vh;
+    background: radial-gradient(closest-side, rgba(10, 10, 15, 0.92), rgba(10, 10, 15, 0.75) 60%, rgba(10, 10, 15, 0));
+  }
+  .hero-role, .hero-pitch { text-shadow: 0 0 14px var(--bg), 0 0 4px var(--bg); }
+  .hero-stats { gap: 12px; }
+  .hero-stats div { flex: 1 1 0; min-width: 0; }
+  .hero-stats dt { line-height: 1.35; }
 }
 
 /* ------------------------------------------------------ Reduced motion -- */
