@@ -78,6 +78,7 @@ async function startExperience() {
 }
 
 function intro() {
+  window.scrollTo(0, 0);
   loader.hide();
   root.classList.remove('is-loading');
   root.classList.add('is-ready');

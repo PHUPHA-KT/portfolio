@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <script>document.documentElement.classList.add('js', 'is-loading');</script>
+  <script>
+    document.documentElement.classList.add('js', 'is-loading');
+    // Always start at the top (the intro plays from the hero): no scroll
+    // restoration on reload, and drop any #fragment before the browser jumps to it.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  </script>
 
   <title>ภูผา คงถิ่น — AI &amp; Automation · Software Developer</title>
   <meta name="description" content="Portfolio ของ ภูผา คงถิ่น นักศึกษาเทคโนโลยีสารสนเทศสาย AI & Automation และ Software Development — สร้าง AI app / agent ระบบอัตโนมัติ และเว็บแอปที่ทีมใช้งานจริงทุกวัน บนรากฐานความมั่นคงปลอดภัยไซเบอร์ระดับผู้เชี่ยวชาญจาก สกมช." />
@@ -33,29 +39,29 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css?v=202611061322" />
+  <link rel="stylesheet" href="css/main.css?v=202611101101" />
 
   <script type="importmap">
   {
     "imports": {
       "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/",
-      "./js/Experience.js": "./js/Experience.js?v=202611061322",
-      "./js/core/Renderer.js": "./js/core/Renderer.js?v=202611061322",
-      "./js/core/Stage.js": "./js/core/Stage.js?v=202611061322",
-      "./js/interaction/Cursor.js": "./js/interaction/Cursor.js?v=202611061322",
-      "./js/interaction/Pointer.js": "./js/interaction/Pointer.js?v=202611061322",
-      "./js/interaction/ScrollDriver.js": "./js/interaction/ScrollDriver.js?v=202611061322",
-      "./js/main.js": "./js/main.js?v=202611061322",
-      "./js/sim/ParticleSim.js": "./js/sim/ParticleSim.js?v=202611061322",
-      "./js/sim/formations.js": "./js/sim/formations.js?v=202611061322",
-      "./js/sim/shaders.js": "./js/sim/shaders.js?v=202611061322",
-      "./js/ui/Labels.js": "./js/ui/Labels.js?v=202611061322",
-      "./js/ui/Lightbox.js": "./js/ui/Lightbox.js?v=202611061322",
-      "./js/ui/Loader.js": "./js/ui/Loader.js?v=202611061322",
-      "./js/ui/ui.js": "./js/ui/ui.js?v=202611061322",
-      "./js/utils/EventBus.js": "./js/utils/EventBus.js?v=202611061322",
-      "./js/utils/device.js": "./js/utils/device.js?v=202611061322"
+      "./js/Experience.js": "./js/Experience.js?v=202611101101",
+      "./js/core/Renderer.js": "./js/core/Renderer.js?v=202611101101",
+      "./js/core/Stage.js": "./js/core/Stage.js?v=202611101101",
+      "./js/interaction/Cursor.js": "./js/interaction/Cursor.js?v=202611101101",
+      "./js/interaction/Pointer.js": "./js/interaction/Pointer.js?v=202611101101",
+      "./js/interaction/ScrollDriver.js": "./js/interaction/ScrollDriver.js?v=202611101101",
+      "./js/main.js": "./js/main.js?v=202611101101",
+      "./js/sim/ParticleSim.js": "./js/sim/ParticleSim.js?v=202611101101",
+      "./js/sim/formations.js": "./js/sim/formations.js?v=202611101101",
+      "./js/sim/shaders.js": "./js/sim/shaders.js?v=202611101101",
+      "./js/ui/Labels.js": "./js/ui/Labels.js?v=202611101101",
+      "./js/ui/Lightbox.js": "./js/ui/Lightbox.js?v=202611101101",
+      "./js/ui/Loader.js": "./js/ui/Loader.js?v=202611101101",
+      "./js/ui/ui.js": "./js/ui/ui.js?v=202611101101",
+      "./js/utils/EventBus.js": "./js/utils/EventBus.js?v=202611101101",
+      "./js/utils/device.js": "./js/utils/device.js?v=202611101101"
     }
   }
   </script>
@@ -129,7 +135,7 @@
 
       <dl class="hero-stats intro" style="--i:5">
         <div><dt>ผลงาน</dt><dd><span data-count="5">5</span></dd></div>
-        <div><dt>วิวจากคลิป<span class="nw">ที่ AI สร้าง</span></dt><dd><span data-count="368">368</span>K</dd></div>
+        <div><dt>ผู้ติดตามช่อง<span class="nw">ที่ AI ช่วยผลิต</span></dt><dd><span data-count="10">10</span>K+</dd></div>
         <div><dt>ประกาศนียบัตร</dt><dd><span data-count="14">14</span>+</dd></div>
       </dl>
 
@@ -256,10 +262,11 @@
           <h3 class="project-title reveal">TopicClip&nbsp;— <span class="nw">หัวข้อเดียว</span> → <span class="nw">คลิปสั้นภาษาไทย</span></h3>
           <p class="project-sub reveal">ใช้จริงกับช่อง “รู้ยัง by Not” บน YouTube และ TikTok</p>
           <p class="body reveal">
-            พิมพ์หัวข้อ 1 บรรทัด → AI ค้นข้อมูลจากเว็บพร้อมแหล่งอ้างอิง → เขียนบท → Claude เขียน animation (HTML/JS)
-            <span class="nw">ทีละ scene</span> → พากย์ไทยด้วย ElevenLabs → ใส่เพลง SFX และซับ ได้คลิปพร้อมปกที่ AI วาดและข้อความโพสต์
-            มี checkpoint ให้คนตรวจบทและภาพก่อนใช้เครดิต รองรับคลิปความรู้ เล่าเรื่อง ซีรีส์หลายเสียง
-            (ตัวละครแต่ละตัวมีเสียงของตัวเอง) และซีรีส์ Shorts หลาย EP ทั้งแนวตั้ง 9:16 และแนวนอน 16:9
+            พิมพ์หัวข้อ 1 บรรทัด → AI ค้นข้อมูลจากเว็บพร้อมแหล่งอ้างอิง → บทและการเล่าเรื่องผมเขียนเองที่
+            <span class="nw">script checkpoint</span> → Claude ทำ animation (HTML/SVG motion) <span class="nw">ทีละ scene</span>
+            → พากย์ไทยด้วย ElevenLabs → AI ตรวจเฟรมก่อน render → ได้คลิปพร้อมปก ข้อความโพสต์ และเครดิต
+            รองรับคลิปความรู้ เล่าเรื่อง ซีรีส์หลายเสียง (ตัวละครแต่ละตัวมีเสียงของตัวเอง)
+            และซีรีส์เรื่องยาวอย่าง “<span class="nw">ประเทศไทยต่างโลก</span>” 9 EP ทั้งแนวตั้ง 9:16 และแนวนอน 16:9
           </p>
           <p class="body reveal">
             Web dashboard (FastAPI) สร้างคลิป ต่อคิวหลายหัวข้อ เก็บคลังคลิปแยกตามซีรีส์ และวิเคราะห์ผลจาก
@@ -267,11 +274,12 @@
             แล้วป้อนผลจริงกลับให้ AI ใช้คิด<span class="nw">หัวข้อถัดไป</span>
           </p>
           <dl class="metrics reveal">
-            <div><dd>81</dd><dt>คลิปที่ระบบสร้าง</dt></div>
-            <div><dd>~368K</dd><dt>วิวรวม YouTube + TikTok</dt></div>
-            <div><dd>1,000</dd><dt>ผู้ติดตาม YouTube</dt></div>
+            <div><dd>110</dd><dt>คลิปที่ระบบสร้าง</dt></div>
+            <div><dd>6.9K+</dd><dt>ผู้ติดตาม TikTok</dt></div>
+            <div><dd>~4K</dd><dt>ผู้ติดตาม YouTube</dt></div>
           </dl>
-          <p class="project-sub reveal">~9.3K บรรทัด&nbsp;· 28 โมดูล&nbsp;· 112 tests&nbsp;· 96 commits</p>
+          <p class="project-sub reveal">คลิปดีสุด 330K วิว (TikTok)&nbsp;· 185K วิว (YouTube)&nbsp;· เฉลี่ย 5–10K วิวต่อคลิป</p>
+          <p class="project-sub reveal">~10K บรรทัด&nbsp;· 29 โมดูล&nbsp;· 136 tests&nbsp;· 100 commits</p>
           <ul class="tags reveal">
             <li>Python</li><li>FastAPI</li><li>Claude</li><li>Playwright</li><li>ffmpeg</li><li>ElevenLabs</li><li><span class="nw">YouTube Analytics API</span></li><li>pythainlp</li><li>Ollama</li>
           </ul>
@@ -280,11 +288,11 @@
             <a class="btn" href="https://www.tiktok.com/@rooyangbynot" target="_blank" rel="noopener">TikTok</a>
           </p>
           <div class="video video--vertical reveal">
-            <video controls preload="none" playsinline poster="projects/topicclip-poster.jpg" aria-label="ตัวอย่างคลิปที่ TopicClip สร้าง: ทหาร 800 นายปะทะทัพหลายหมื่น">
+            <video controls preload="none" playsinline poster="projects/topicclip-poster.jpg" aria-label="ตัวอย่างคลิปที่ TopicClip สร้าง: คนไทย 1,000 คนตื่นมาในยุคหิน">
               <source src="projects/topicclip-sample.mp4" type="video/mp4" />
             </video>
           </div>
-          <p class="video-caption reveal">ตัวอย่างคลิปจากระบบ: ทหารราบสมัยใหม่ 1 กองพันย้อนยุคเซ็นโงกุ (41K วิวบน TikTok)</p>
+          <p class="video-caption reveal">ตัวอย่างคลิปจากระบบ: คนไทย 1,000 คนตื่นมาในยุคหิน (#81, คลิปดีสุด 330K วิวบน TikTok)</p>
         </div>
       </article>
 
@@ -495,6 +503,6 @@
     </figure>
   </dialog>
 
-  <script type="module" src="js/main.js?v=202611061322"></script>
+  <script type="module" src="js/main.js?v=202611101101"></script>
 </body>
 </html>
