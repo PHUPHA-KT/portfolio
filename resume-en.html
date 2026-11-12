@@ -14,8 +14,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="resume.css?v=202611101101" />
-  <script src="resume-track.js?v=202611101101"></script>
+  <link rel="stylesheet" href="resume.css?v=202611120557" />
+  <script src="resume-track.js?v=202611120557"></script>
 </head>
 <body>
 
@@ -53,36 +53,18 @@
     </header>
 
     <p class="r-summary" data-only="ai">
-      Final-year IT student targeting <em><span class="nw">AI &amp; Automation</span></em> roles&nbsp;— builds <span class="nw">AI apps / agents</span>
-      and automation pipelines that <em>cut repetitive work</em>, such as a topic-to-video pipeline that runs
-      a real channel (10K+ followers). Solid web development foundation and <span class="nw">expert-level</span>
-      cybersecurity training <span class="nw">from NCSA.</span>
+      Final-year IT student in <em><span class="nw">AI &amp; automation</span></em>&nbsp;— designs and builds <em>AI pipelines and automation that people actually use</em>,
+      from data collection to content production. Web development foundation; cybersecurity training <span class="nw">from NCSA.</span>
     </p>
     <p class="r-summary" data-only="dev">
-      Final-year IT student targeting <em><span class="nw">software development</span></em> roles&nbsp;— ships <em>web apps a team uses every day</em>
-      (realtime sync, <span class="nw">row-level security</span>, tests and CI-driven backups) and Python backends,
-      using AI tools deliberately to move faster. <span class="nw">Expert-level</span> cybersecurity training <span class="nw">from NCSA.</span>
+      Final-year IT student in <em><span class="nw">software development</span></em>&nbsp;— builds <em>web apps and backends used daily</em>,
+      with tests and CI, using AI tools deliberately. Cybersecurity training <span class="nw">from NCSA.</span>
     </p>
 
     <div class="r-body">
 
       <!-- ===================== MAIN COLUMN ===================== -->
       <div class="r-main">
-
-        <section>
-          <h2 class="r-h2">Experience</h2>
-          <div class="entry">
-            <div class="entry-top">
-              <h3 class="entry-org">Metropolitan Electricity <span class="nw">Authority (MEA)</span></h3>
-              <span class="entry-when">3 months</span>
-            </div>
-            <p class="entry-role">Student Intern</p>
-            <ul class="entry-desc">
-              <li>Prioritised and managed task workload to deliver projects on schedule</li>
-              <li>Coordinated across departments to move work requiring <span class="nw">multiple teams</span></li>
-            </ul>
-          </div>
-        </section>
 
         <section>
           <h2 class="r-h2">Projects</h2>
@@ -94,24 +76,14 @@
                 <span class="entry-when">AI Pipeline</span>
               </div>
               <p class="entry-role">Python&nbsp;· FastAPI&nbsp;· Claude&nbsp;· Playwright&nbsp;· ffmpeg&nbsp;· ElevenLabs&nbsp;· <span class="nw">YouTube API</span></p>
+              <a class="r-proj-link" href="https://www.tiktok.com/@rooyangbynot">tiktok.com/@rooyangbynot</a>
               <ul class="entry-desc">
-                <li>One topic → AI research → my own script → per-scene animation, Thai voice, AI frame review → finished clip, with checkpoints</li>
+                <li>One topic → AI research → my own script → per-scene animation, Thai voice, AI frame review → finished clip, with checkpoints (built on my earlier manga-editing pipeline)</li>
                 <li data-only="ai">Runs a real channel: 110 clips, 6.9K+ TikTok / ~4K YouTube followers, best clip 330K views</li>
                 <li data-only="dev">Runs a real channel: 110 clips, 6.9K+ TikTok / ~4K YouTube followers, best clip 330K views; 136 tests</li>
               </ul>
             </div>
 
-            <div class="entry r-proj" style="--ai: 4; --dev: 5" data-only="ai">
-              <div class="entry-top">
-                <h3 class="entry-org">Manga Localization Automation Pipeline</h3>
-                <span class="entry-when">Automation</span>
-              </div>
-              <p class="entry-role">Personal project&nbsp;· AI + workflow automation</p>
-              <ul class="entry-desc">
-                <li>End-to-end automated pipeline for the manga <span class="nw">translation / production</span> workflow, cutting many <span class="nw">manual steps</span></li>
-                <li>Integrated AI to speed up throughput and keep output consistent</li>
-              </ul>
-            </div>
 
             <div class="entry r-proj" style="--ai: 2; --dev: 3">
               <div class="entry-top">
@@ -144,11 +116,27 @@
                 <span class="entry-when">Web App</span>
               </div>
               <p class="entry-role">JavaScript&nbsp;· Supabase (PostgreSQL + <span class="nw">RLS</span>, Realtime)&nbsp;· <span class="nw">GitHub Actions</span>&nbsp;· <span class="nw">GitHub Pages</span></p>
+              <a class="r-proj-link" href="https://github.com/PHUPHA-KT/WEB_teamSec">github.com/PHUPHA-KT/WEB_teamSec</a>
               <ul class="entry-desc">
                 <li>Replaced a 4-person team's single HTML file with a realtime workspace: owners, release days, daily status, drag-and-drop calendar, fair episode splits</li>
                 <li>Version-checked saves + field-level merge, staging + tests, nightly backups via GitHub Actions; 85 series daily at $0 hosting</li>
               </ul>
             </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="r-h2">Experience</h2>
+          <div class="entry">
+            <div class="entry-top">
+              <h3 class="entry-org">Metropolitan Electricity <span class="nw">Authority (MEA)</span></h3>
+              <span class="entry-when">3 months</span>
+            </div>
+            <p class="entry-role">Student Intern</p>
+            <ul class="entry-desc">
+              <li>Prioritised and managed task workload to deliver projects on schedule</li>
+              <li>Coordinated across departments to move work requiring <span class="nw">multiple teams</span></li>
+            </ul>
           </div>
         </section>
 
@@ -227,10 +215,6 @@
     </div>
 
     <footer class="r-foot">
-      <div class="r-foot-info">
-        <span>Phupha Kongtin&nbsp;— <span class="nw" data-only="ai">AI &amp; Automation</span><span class="nw" data-only="dev">Software Developer</span></span>
-        <span>092-269-6035&nbsp;· phuphakongtin@gmail.com&nbsp;· github.com/PHUPHA-KT</span>
-      </div>
       <figure class="r-qr">
         <img src="qr.svg" alt="QR code to online portfolio" width="88" height="88" />
         <figcaption>Scan to view portfolio online<br />phupha-kt.github.io/portfolio</figcaption>

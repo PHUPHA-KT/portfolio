@@ -211,13 +211,13 @@ strong { color: var(--text-hi); font-weight: 500; }
 /* ---------- Project demo link ---------- */
 .r-proj-link {
   display: inline-block;
-  margin-top: 3px;
-  font-size: 9pt;
+  margin-top: 1px;
+  font-size: 8.5pt;
   color: var(--accent);
   font-family: var(--font-display);
   letter-spacing: 0.02em;
 }
-.r-proj-link::before { content: "▶ "; font-size: 0.85em; }
+.r-proj-link::before { content: "↗ "; }
 
 /* ---------- Skills ---------- */
 .skill-row + .skill-row { margin-top: 9px; }
@@ -239,7 +239,7 @@ strong { color: var(--text-hi); font-weight: 500; }
   font-size: 8.5pt;
   color: var(--text-low);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
